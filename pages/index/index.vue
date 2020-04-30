@@ -3,29 +3,31 @@
 		<s-tab-bar :tabIndex="tabIndex" :tabBars="tabBars" @itemClick="handleItemClick"></s-tab-bar>
 		<swiper :style="{height:swiperHeight+'px'}" :current="tabIndex" @change="handleSwiperChange">
 			<swiper-item v-for="(pageItem,pageIndex) in tabBars" :key="pageIndex">
-				<scroll-view scroll-y="true" :style="{height:swiperHeight+'px'}">
-					<block v-for="(item,index) in listData" :key="item.id">
+				<scroll-view scroll-y="true" :style="{height:swiperHeight+'px'}" @scrolltolower="handleReachBottom">
+					<block v-for="(item,index) in listData" :key="index">
 						<s-index-list :itemData="item"></s-index-list>
 					</block>
+					<s-load-more :loadText="loadText"></s-load-more>
 				</scroll-view>
-
 			</swiper-item>
 		</swiper>
 	</view>
 </template>
 <script>
 	import sIndexList from "../../component/index/s-index-list.vue";
-	import sTabBar from "../../component/index/s-tab-bar.vue"
+	import sTabBar from "../../component/index/s-tab-bar.vue";
+	import sLoadMore from "../../component/index/s-load-more.vue"
 	export default {
 		components: {
 			sIndexList,
-			sTabBar
+			sTabBar,
+			sLoadMore
 		},
 		onLoad() {
 			this.getListData()
 			uni.getSystemInfo({
 				success: (res) => {
-					let height = res.windowHeight - uni.upx2px(70)
+					let height = res.windowHeight - uni.upx2px(80)
 					this.swiperHeight = height;
 				}
 			});
@@ -63,13 +65,13 @@
 					name: '本地',
 					id: 'bendi'
 				}],
-				scrollInto: ""
+				scrollInto: "",
+				loadText: "上拉加载更多..."
 			}
 		},
 		methods: {
 			//TabBar点击事件
 			handleItemClick(index) {
-				console.log(index)
 				this.tabIndex = index
 				this.scrollInto = this.tabBars[index].id
 			},
@@ -78,11 +80,17 @@
 				this.request({
 					url: "https://m2.qiushibaike.com/article/newlist?new=1&readarticles=[123018375]"
 				}).then(result => {
-					this.listData = result.items
+					this.listData = [...this.listData, ...result.items]
+					this.loadText = "上拉加载更多..."
+					// this.listData = result.items
 				})
 			},
 			handleSwiperChange(e) {
 				this.tabIndex = e.detail.current
+			},
+			handleReachBottom() {
+				this.loadText = "加载中..."
+				this.getListData()
 			}
 		}
 	}

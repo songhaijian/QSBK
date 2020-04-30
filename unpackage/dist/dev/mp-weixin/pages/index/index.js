@@ -138,7 +138,8 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var sIndexList = function sIndexList() {__webpack_require__.e(/*! require.ensure | component/index/s-index-list */ "component/index/s-index-list").then((function () {return resolve(__webpack_require__(/*! ../../component/index/s-index-list.vue */ 44));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var sTabBar = function sTabBar() {__webpack_require__.e(/*! require.ensure | component/index/s-tab-bar */ "component/index/s-tab-bar").then((function () {return resolve(__webpack_require__(/*! ../../component/index/s-tab-bar.vue */ 22));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(n);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}var sIndexList = function sIndexList() {__webpack_require__.e(/*! require.ensure | component/index/s-index-list */ "component/index/s-index-list").then((function () {return resolve(__webpack_require__(/*! ../../component/index/s-index-list.vue */ 44));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var sTabBar = function sTabBar() {__webpack_require__.e(/*! require.ensure | component/index/s-tab-bar */ "component/index/s-tab-bar").then((function () {return resolve(__webpack_require__(/*! ../../component/index/s-tab-bar.vue */ 57));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var sLoadMore = function sLoadMore() {__webpack_require__.e(/*! require.ensure | component/index/s-load-more */ "component/index/s-load-more").then((function () {return resolve(__webpack_require__(/*! ../../component/index/s-load-more.vue */ 22));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
 
 
 
@@ -159,13 +160,14 @@ __webpack_require__.r(__webpack_exports__);
 {
   components: {
     sIndexList: sIndexList,
-    sTabBar: sTabBar },
+    sTabBar: sTabBar,
+    sLoadMore: sLoadMore },
 
   onLoad: function onLoad() {var _this = this;
     this.getListData();
     uni.getSystemInfo({
       success: function success(res) {
-        var height = res.windowHeight - uni.upx2px(70);
+        var height = res.windowHeight - uni.upx2px(80);
         _this.swiperHeight = height;
       } });
 
@@ -203,13 +205,13 @@ __webpack_require__.r(__webpack_exports__);
         name: '本地',
         id: 'bendi' }],
 
-      scrollInto: "" };
+      scrollInto: "",
+      loadText: "上拉加载更多..." };
 
   },
   methods: {
     //TabBar点击事件
     handleItemClick: function handleItemClick(index) {
-      console.log(index);
       this.tabIndex = index;
       this.scrollInto = this.tabBars[index].id;
     },
@@ -218,11 +220,17 @@ __webpack_require__.r(__webpack_exports__);
       this.request({
         url: "https://m2.qiushibaike.com/article/newlist?new=1&readarticles=[123018375]" }).
       then(function (result) {
-        _this2.listData = result.items;
+        _this2.listData = [].concat(_toConsumableArray(_this2.listData), _toConsumableArray(result.items));
+        _this2.loadText = "上拉加载更多...";
+        // this.listData = result.items
       });
     },
     handleSwiperChange: function handleSwiperChange(e) {
       this.tabIndex = e.detail.current;
+    },
+    handleReachBottom: function handleReachBottom() {
+      this.loadText = "加载中...";
+      this.getListData();
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

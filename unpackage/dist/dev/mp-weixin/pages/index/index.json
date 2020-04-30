@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "s-index-list": "/component/index/s-index-list",
-    "s-tab-bar": "/component/index/s-tab-bar"
+    "s-tab-bar": "/component/index/s-tab-bar",
+    "s-load-more": "/component/index/s-load-more"
   }
 }

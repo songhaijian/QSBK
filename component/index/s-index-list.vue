@@ -1,8 +1,8 @@
 <template>
-	<view v-if="itemData.tag=='video'" class="item_wrap">
+	<view v-if="itemData.tag=='video'" class="item_wrap animated fadeInLeft">
 		<view class="item_line1">
 			<view class="line1_left">
-				<image :src="itemData.user.thumb" mode="widthFix"></image>
+				<image :src="itemData.user.thumb" mode="widthFix" lazy-load=""></image>
 				<view class="user_wrap">
 					<view class="name_wrap">
 						<view class="nickname">
