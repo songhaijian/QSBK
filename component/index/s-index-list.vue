@@ -17,7 +17,7 @@
 			</view>
 
 			<view class="attention">
-				关注
+				+&nbsp;关注
 			</view>
 		</view>
 		<view class="item_line2">
