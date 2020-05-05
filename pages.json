@@ -16,22 +16,21 @@
 							"disabled": "true"
 						},
 						// 配置按钮
-						"buttons":[
-							{
-								"color":"#ff9619",
-								"colorPressed":"#bbbbbb",
-								"float":"left",
-								"fontSize":"20px",
-								"fontSrc":"/static/font/icon.ttf",
-								"text":"\ue609"
+						"buttons": [{
+								"color": "#ff9619",
+								"colorPressed": "#bbbbbb",
+								"float": "left",
+								"fontSize": "20px",
+								"fontSrc": "/static/font/icon.ttf",
+								"text": "\ue609"
 							},
 							{
-								"color":"#000000",
-								"colorPressed":"#bbbbbb",
-								"float":"right",
-								"fontSize":"20px",
-								"fontSrc":"/static/font/icon.ttf",
-								"text":"\ue653"
+								"color": "#000000",
+								"colorPressed": "#bbbbbb",
+								"float": "right",
+								"fontSize": "20px",
+								"fontSrc": "/static/font/icon.ttf",
+								"text": "\ue653"
 							}
 						]
 					}
@@ -41,7 +40,9 @@
 		{
 			"path": "pages/news/news",
 			"style": {
-				"navigationBarTitleText": "动态"
+				"app-plus": {
+					"titleNView": false
+				}
 			}
 		},
 		{
@@ -55,8 +56,59 @@
 			"style": {
 				"navigationBarTitleText": "我的"
 			}
+		}, {
+			"path": "pages/index/search-index/search-index",
+			"style": {
+				"app-plus": {
+					"titleNView": {
+						"autoBackButton": false,
+						"searchInput": {
+							"align": "left",
+							"borderRadius": "10rpx",
+							"placeholder": "搜索糗事",
+							"placeholderColor": "#cccccc",
+							"backgroundColor": "#f7f7f7"
+						},
+						"buttons": [{
+							"float": "right",
+							"fontSize": "30rpx",
+							"text": "取消",
+							"color": "#000000",
+							"fontWeight": "bold"
+						}]
+					}
+				}
+			}
+		}, {
+			"path": "pages/index/index-publish/index-publish",
+			"style": {
+				"app-plus": {
+					"titleNView": false
+				}
+			}
 		}
-	],
+	    ,{
+            "path" : "pages/news/topic-sort/topic-sort",
+            "style" : {
+				"navigationBarTitleText":"话题分类"
+			}
+        }
+        ,{
+            "path" : "pages/news/hot-sort-detail/hot-sort-detail",
+            "style" : {
+				"app-plus":{
+					"titleNView":{
+						"type":"transparent",
+						"buttons":[
+							{
+								"type":"menu"
+							}
+						]
+					}
+				}
+			}
+        }
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "仿糗事百科",

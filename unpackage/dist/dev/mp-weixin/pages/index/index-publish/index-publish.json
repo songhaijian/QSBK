@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "uni-nav-bar": "/component/index/uni-nav-bar",
+    "upload-img": "/component/common/upload-img"
+  }
+}

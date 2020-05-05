@@ -3,7 +3,9 @@
     "pages/index/index",
     "pages/news/news",
     "pages/paper/paper",
-    "pages/mine/mine"
+    "pages/mine/mine",
+    "pages/index/search-index/search-index",
+    "pages/index/index-publish/index-publish"
   ],
   "subPackages": [],
   "window": {
@@ -45,5 +47,5 @@
     ]
   },
   "usingComponents": {},
-  "sitemapLocation": "sitemap91.json"
+  "sitemapLocation": "sitemap59.json"
 }

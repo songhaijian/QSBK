@@ -104,11 +104,11 @@
 /******/
 /******/
 /******/ 		// mini-css-extract-plugin CSS loading
-/******/ 		var cssChunks = {"component/index/s-index-list":1,"component/index/s-load-more":1,"component/index/s-tab-bar":1};
+/******/ 		var cssChunks = {"component/index/s-index-list":1,"component/index/s-load-more":1,"component/index/s-tab-bar":1,"component/common/upload-img":1,"component/index/uni-nav-bar":1,"component/index/uni-icons":1,"component/index/uni-status-bar":1};
 /******/ 		if(installedCssChunks[chunkId]) promises.push(installedCssChunks[chunkId]);
 /******/ 		else if(installedCssChunks[chunkId] !== 0 && cssChunks[chunkId]) {
 /******/ 			promises.push(installedCssChunks[chunkId] = new Promise(function(resolve, reject) {
-/******/ 				var href = "" + ({"component/index/s-index-list":"component/index/s-index-list","component/index/s-load-more":"component/index/s-load-more","component/index/s-tab-bar":"component/index/s-tab-bar"}[chunkId]||chunkId) + ".wxss";
+/******/ 				var href = "" + ({"component/index/s-index-list":"component/index/s-index-list","component/index/s-load-more":"component/index/s-load-more","component/index/s-tab-bar":"component/index/s-tab-bar","component/common/upload-img":"component/common/upload-img","component/index/uni-nav-bar":"component/index/uni-nav-bar","component/index/uni-icons":"component/index/uni-icons","component/index/uni-status-bar":"component/index/uni-status-bar"}[chunkId]||chunkId) + ".wxss";
 /******/ 				var fullhref = __webpack_require__.p + href;
 /******/ 				var existingLinkTags = document.getElementsByTagName("link");
 /******/ 				for(var i = 0; i < existingLinkTags.length; i++) {

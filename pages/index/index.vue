@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<s-tab-bar :tabIndex="tabIndex" :tabBars="tabBars" @itemClick="handleItemClick"></s-tab-bar>
+		<s-tab-bar :tabIndex="tabIndex" :tabBars="tabBars" @itemClick="handleItemClick" :scrollInto="scrollInto"></s-tab-bar>
 		<swiper :style="{height:swiperHeight+'px'}" :current="tabIndex" @change="handleSwiperChange">
 			<swiper-item v-for="(pageItem,pageIndex) in tabBars" :key="pageIndex">
 				<scroll-view scroll-y="true" :style="{height:swiperHeight+'px'}" @scrolltolower="handleReachBottom">
@@ -87,10 +87,31 @@
 			},
 			handleSwiperChange(e) {
 				this.tabIndex = e.detail.current
+				this.scrollInto = this.tabBars[e.detail.current].id
 			},
 			handleReachBottom() {
 				this.loadText = "加载中..."
 				this.getListData()
+			}
+		},
+		onNavigationBarSearchInputClicked() {
+			uni.navigateTo({
+				url: "search-index/search-index"
+			})
+		},
+		onNavigationBarButtonTap(e) {
+			switch (e.index) {
+				case 0:
+					// 签到按钮
+					break;
+				case 1:
+					// 发布按钮
+					uni.navigateTo({
+						url: "/pages/index/index-publish/index-publish"
+					})
+					break;
+				default:
+					break;
 			}
 		}
 	}

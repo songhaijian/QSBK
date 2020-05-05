@@ -24,10 +24,24 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.load_more_wrap.data-v-793bb62a {
-  text-align: center;
-  padding: 20rpx 0;
-  color: #aaa;
-  font-size: 30rpx;
+.nav_title_wrap.data-v-63b2c578 {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.publish_input.data-v-63b2c578 {
+  border: 1rpx solid #EEEEEE;
+}
+.publish_input textarea.data-v-63b2c578 {
+  width: 100%;
 }
 

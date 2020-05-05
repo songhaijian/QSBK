@@ -16,4 +16,5 @@
 	/*每个页面公共css */
 	@import url("./commen/iconfont.css");
 	@import url("./commen/animate.css");
+	@import url("./commen/uni.css");
 </style>
