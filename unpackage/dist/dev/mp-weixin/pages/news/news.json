@@ -1,4 +1,9 @@
 {
-  "navigationBarTitleText": "动态",
-  "usingComponents": {}
+  "usingComponents": {
+    "s-news-tabbar": "/component/news/s-news-tabbar",
+    "s-news-common-list": "/component/common/s-news-common-list",
+    "s-load-more": "/component/index/s-load-more",
+    "s-news-hot-sort": "/component/news/s-news-hot-sort",
+    "s-news-recent-update-item": "/component/news/s-news-recent-update-item"
+  }
 }

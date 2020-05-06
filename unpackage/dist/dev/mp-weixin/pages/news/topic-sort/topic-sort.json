@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "话题分类",
+  "usingComponents": {
+    "s-tab-bar": "/component/index/s-tab-bar",
+    "s-news-recent-update-item": "/component/news/s-news-recent-update-item"
+  }
+}

@@ -5,7 +5,11 @@
     "pages/paper/paper",
     "pages/mine/mine",
     "pages/index/search-index/search-index",
-    "pages/index/index-publish/index-publish"
+    "pages/index/index-publish/index-publish",
+    "pages/news/topic-sort/topic-sort",
+    "pages/news/hot-sort-detail/hot-sort-detail",
+    "pages/paper/s-paper-friend-list/s-paper-friend-list",
+    "pages/paper/s-paper-chat/s-paper-chat"
   ],
   "subPackages": [],
   "window": {
@@ -46,6 +50,5 @@
       }
     ]
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap59.json"
+  "usingComponents": {}
 }

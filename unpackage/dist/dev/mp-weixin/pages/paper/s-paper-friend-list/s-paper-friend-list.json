@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "s-tab-bar": "/component/index/s-tab-bar",
+    "s-paper-friend-item": "/component/paper/s-paper-friend-item"
+  }
+}

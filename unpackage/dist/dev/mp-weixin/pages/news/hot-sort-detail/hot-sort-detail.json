@@ -1,0 +1,9 @@
+{
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "s-news-topic-detail": "/component/news/s-news-topic-detail",
+    "s-tab-bar": "/component/index/s-tab-bar",
+    "s-news-common-list": "/component/common/s-news-common-list",
+    "s-load-more": "/component/index/s-load-more"
+  }
+}

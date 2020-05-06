@@ -30,7 +30,7 @@
 		methods:{
 			haneleItemClick(){
 				uni.navigateTo({
-					url:"../../pages/news/hot-sort-detail/hot-sort-detail"
+					url:"/pages/news/hot-sort-detail/hot-sort-detail"
 				})
 			}
 		}

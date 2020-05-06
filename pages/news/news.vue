@@ -146,7 +146,7 @@
 							titlePic: "",
 							video: false,
 							share: {
-								shareTitle: "从男人监督告诉你,为什么他对你有好感却不追呢",
+								shareTitle: "从男人角度告诉你,为什么他对你有好感却不追呢",
 								shareImg: "../../static/datapic/1.jpg"
 							},
 							path: "深圳 龙岗",

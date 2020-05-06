@@ -1,89 +1,223 @@
 <template>
-	<view class="topic_detail_wrap">
-		<view class="top_bg_wrap">
-			<image src="../../../static/topicpic/11.jpeg" mode="aspectFill"></image>
-		</view>
-		<view class="info_wrap">
-			<view class="info_line1">
-				<image src="../../../static/topicpic/11.jpeg" mode="widthFix"></image>
-				<view class="info_line1_title">
-					#忆往事,敬余生#
-				</view>
-			</view>
-			<view class="info_line2">
-				<view class="news_num_wrap">
-					动态123
-				</view>
-				<view class="today_num_wrap">
-					今日456
-				</view>
-			</view>
-			<view class="info_line3">
-				面试官:在电梯里巧遇马云你会做什么?90后女孩的回答当场被录用
-			</view>
+	<view>
+		<s-news-topic-detail :topicDetailObj="topicDetailObj"></s-news-topic-detail>
+		<s-tab-bar :tabIndex="tabIndex" :tabBars="tabBars" @itemClick="handleItemClick" :itemStyle="itemStyle"></s-tab-bar>
+		<view class="topic_detail_list_wrap">
+			<block v-for="(item,index) in topicDetailList" :key="index">
+				<template v-if="index==tabIndex">
+					<block v-for="(listItem,listIndex) in item.list" :key="listIndex">
+						<s-news-common-list :item="listItem"></s-news-common-list>
+					</block>
+					<s-load-more :loadText="item.loadText"></s-load-more>
+				</template>
+			</block>
 		</view>
 	</view>
 </template>
 
 <script>
+	import sNewsTopicDetail from "../../../component/news/s-news-topic-detail.vue"
+	import sTabBar from "../../../component/index/s-tab-bar.vue"
+	import sNewsCommonList from "../../../component/common/s-news-common-list.vue"
+	import sLoadMore from "../../../component/index/s-load-more.vue"
 	export default {
+		components: {
+			sNewsTopicDetail,
+			sTabBar,
+			sNewsCommonList,
+			sLoadMore
+		},
 		data() {
 			return {
-
+				topicDetailObj: {
+					imagePath: "/static/topicpic/3.jpeg",
+					title: "天天大卡",
+					desc: "面试官:在电梯里巧遇马云你会做什么?90后女孩的回答当场被录用",
+					newsNum: 507,
+					todayNum: 707
+				},
+				tabIndex: 1,
+				tabBars: [{
+					name: '默认',
+					id: 'moren'
+				}, {
+					name: '最新',
+					id: 'zuixin'
+				}],
+				itemStyle: "width:50%;",
+				topicDetailList: [{
+					loadText: "上拉加载更多...",
+					list: [
+						// 文字
+						{
+							userPic: "/static/userpic/10.jpg",
+							userName: "三鱼先生",
+							sex: 0, //0:男 1：女
+							age: 25,
+							isAttention: false,
+							title: "六道快手家常菜,好吃又下饭,家人都喜欢",
+							titlePic: "",
+							video: false,
+							share: false,
+							path: "深圳 龙岗",
+							shareNum: 36,
+							commentNum: 27,
+							favNum: 9829
+						},
+						// 图文
+						{
+							userPic: "/static/userpic/10.jpg",
+							userName: "三鱼先生",
+							sex: 1, //0:男 1：女
+							age: 25,
+							isAttention: false,
+							title: "六道快手家常菜,好吃又下饭,家人都喜欢",
+							titlePic: "/static/datapic/1.jpg",
+							video: false,
+							share: false,
+							path: "深圳 龙岗",
+							shareNum: 36,
+							commentNum: 27,
+							favNum: 9829
+						},
+						// 视频
+						{
+							userPic: "/static/userpic/10.jpg",
+							userName: "三鱼先生",
+							sex: 0, //0:男 1：女
+							age: 25,
+							isAttention: false,
+							title: "六道快手家常菜,好吃又下饭,家人都喜欢",
+							titlePic: "/static/datapic/1.jpg",
+							video: {
+								playNum: "20W次播放",
+								videoTime: "2:47"
+							},
+							share: false,
+							path: "深圳 龙岗",
+							shareNum: 36,
+							commentNum: 27,
+							favNum: 9829
+						},
+						// 分享
+						{
+							userPic: "/static/userpic/10.jpg",
+							userName: "三鱼先生",
+							sex: 0, //0:男 1：女
+							age: 25,
+							isAttention: false,
+							title: "六道快手家常菜,好吃又下饭,家人都喜欢",
+							titlePic: "",
+							video: false,
+							share: {
+								shareTitle: "从男人监督告诉你,为什么他对你有好感却不追呢",
+								shareImg: "/static/datapic/1.jpg"
+							},
+							path: "深圳 龙岗",
+							shareNum: 36,
+							commentNum: 27,
+							favNum: 9829
+						}
+					]
+				}, {
+					loadText: "上拉加载更多...",
+					list: [
+						// 文字
+						{
+							userPic: "/static/userpic/10.jpg",
+							userName: "三鱼先生",
+							sex: 0, //0:男 1：女
+							age: 25,
+							isAttention: false,
+							title: "六道快手家常菜,好吃又下饭,家人都喜欢",
+							titlePic: "",
+							video: false,
+							share: false,
+							path: "深圳 龙岗",
+							shareNum: 36,
+							commentNum: 27,
+							favNum: 9829
+						},
+						// 图文
+						{
+							userPic: "/static/userpic/10.jpg",
+							userName: "三鱼先生",
+							sex: 1, //0:男 1：女
+							age: 25,
+							isAttention: false,
+							title: "六道快手家常菜,好吃又下饭,家人都喜欢",
+							titlePic: "/static/datapic/1.jpg",
+							video: false,
+							share: false,
+							path: "深圳 龙岗",
+							shareNum: 36,
+							commentNum: 27,
+							favNum: 9829
+						},
+						// 视频
+						{
+							userPic: "/static/userpic/10.jpg",
+							userName: "三鱼先生",
+							sex: 0, //0:男 1：女
+							age: 25,
+							isAttention: false,
+							title: "六道快手家常菜,好吃又下饭,家人都喜欢",
+							titlePic: "/static/datapic/1.jpg",
+							video: {
+								playNum: "20W次播放",
+								videoTime: "2:47"
+							},
+							share: false,
+							path: "深圳 龙岗",
+							shareNum: 36,
+							commentNum: 27,
+							favNum: 9829
+						},
+						// 分享
+						{
+							userPic: "/static/userpic/10.jpg",
+							userName: "三鱼先生",
+							sex: 0, //0:男 1：女
+							age: 25,
+							isAttention: false,
+							title: "六道快手家常菜,好吃又下饭,家人都喜欢",
+							titlePic: "",
+							video: false,
+							share: {
+								shareTitle: "从男人角度告诉你,为什么他对你有好感却不追呢",
+								shareImg: "/static/datapic/1.jpg"
+							},
+							path: "深圳 龙岗",
+							shareNum: 36,
+							commentNum: 27,
+							favNum: 9829
+						}
+					]
+				}]
 			}
 		},
 		methods: {
-
+			//TabBar点击事件
+			handleItemClick(index) {
+				this.tabIndex = index
+			}
+		},
+		onReachBottom() {
+			this.topicDetailList[this.tabIndex].loadText = "加载中..."
+			this.topicDetailList[this.tabIndex].list = [...this.topicDetailList[this.tabIndex].list, ...this.topicDetailList[
+					this.tabIndex]
+				.list
+			]
+			this.topicDetailList[this.tabIndex].loadText = "上拉加载更多..."
+		},
+		onPullDownRefresh() {
+			setTimeout(() => {
+				uni.stopPullDownRefresh()
+			}, 2000);
 		}
 	}
 </script>
 
 <style lang="scss" scoped>
-	.topic_detail_wrap {
-		.top_bg_wrap {
-			width: 100%;
-			height: 300rpx;
-			overflow: hidden;
-			image {
-				width: 100%;
-				filter: blur(10px);
-			}
-		}
 
-		.info_wrap {
-			padding: 20rpx;
-			.info_line1 {
-				display: flex;
-				image {
-					width: 150rpx;
-					height: 150rpx;
-					border-radius: 10rpx;
-					margin-top: -95rpx;
-				}
-
-				.info_line1_title {
-					margin-left: 20rpx;
-					color: #000000;
-					font-size: 35rpx;
-				}
-			}
-
-			.info_line2 {
-				margin-top: 10rpx;
-				display: flex;
-				color: #cdcdcd;
-				font-size: 25rpx;
-				.news_num_wrap {
-					margin-right: 10rpx;
-				}
-
-				.today_num_wrap {}
-			}
-
-			.info_line3 {
-				color: #a3a3a3;
-				font-size: 30rpx;
-			}
-		}
-	}
 </style>

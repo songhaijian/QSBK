@@ -10,8 +10,6 @@
 	"libVersion": "2.9.2",
 	"appid": "touristappid",
 	"projectname": "QSBK",
-	"simulatorType": "wechat",
-	"simulatorPluginLibVersion": {},
 	"condition": {
 		"search": {
 			"current": -1,
@@ -38,8 +36,8 @@
 			"list": [
 				{
 					"id": -1,
-					"name": "pages/index/index-publish/index-publish",
-					"pathName": "pages/index/index-publish/index-publish",
+					"name": "pages/paper/s-paper-friend-list/s-paper-friend-list",
+					"pathName": "pages/paper/s-paper-friend-list/s-paper-friend-list",
 					"scene": null
 				}
 			]

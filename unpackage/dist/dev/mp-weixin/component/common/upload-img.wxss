@@ -24,16 +24,16 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.cell-pd.data-v-802f7c88 {
+.cell-pd.data-v-5c3c8129 {
   padding: 22rpx 30rpx;
 }
-.list-pd.data-v-802f7c88 {
+.list-pd.data-v-5c3c8129 {
   margin-top: 50rpx;
 }
-.uni-uploader__file.data-v-802f7c88 {
+.uni-uploader__file.data-v-5c3c8129 {
   position: relative;
 }
-.uni-uploader__file .icon-shanchu.data-v-802f7c88 {
+.uni-uploader__file .icon-shanchu.data-v-5c3c8129 {
   right: 0;
   top: 0;
   position: absolute;

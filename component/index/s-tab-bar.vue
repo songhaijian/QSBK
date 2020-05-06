@@ -3,8 +3,9 @@
 		<scroll-view :scroll-x="true" class="tab_scroll" :scroll-into-view="scrollInto">
 			<block v-for="(item, index) in tabBars" :key="index">
 				<!-- view的id必须添加，不然点击item不会自动滑动 -->
-				<view class="tab_item_wrap" @click="handleItemClick(index)" :class="tabIndex==index?'active':''" :id="item.id">
-					{{item.name}}
+				<view :style="itemStyle" class="tab_item_wrap" @click="handleItemClick(index)" :class="tabIndex==index?'active':''"
+				 :id="item.id">
+					{{item.name}}{{item.num?item.num:''}}
 					<view :class="tabIndex==index?'tab_item_divider':''">
 
 					</view>
@@ -19,12 +20,16 @@
 		props: {
 			tabIndex: Number,
 			tabBars: Array,
-			scrollInto: String
+			scrollInto: String,
+			itemStyle: {
+				type: String,
+				value: ""
+			}
 		},
 		methods: {
 			//TabBar点击事件
 			handleItemClick(index) {
-				this.$emit('itemClick',index)
+				this.$emit('itemClick', index)
 			},
 		}
 	}
@@ -41,8 +46,8 @@
 			margin: 0 auto;
 
 			.tab_item_wrap {
-				width: 10%;
-				padding: 0 20rpx;
+				width: 100rpx;
+				// padding: 0 20rpx;
 				display: inline-block;
 				font-size: 30rpx;
 				color: #969696;
