@@ -168,6 +168,19 @@
 				}
 			}
         }
+        ,{
+            "path" : "pages/index/index-detail/index-detail",
+            "style" : {
+				"app-plus":{
+					"titleNView":{
+						"buttons":[{
+							"float":"right",
+							"type":"menu"
+						}]
+					}
+				}
+			}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

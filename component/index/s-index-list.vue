@@ -1,5 +1,5 @@
 <template>
-	<view v-if="itemData.tag=='video'" class="item_wrap">
+	<view v-if="itemData.tag=='video'" class="item_wrap" @click="handleItemClick">
 		<view class="item_line1">
 			<view class="line1_left">
 				<image :src="itemData.user.thumb" mode="widthFix" lazy-load=""></image>
@@ -60,6 +60,13 @@
 		},
 		props: {
 			itemData: Object
+		},
+		methods: {
+			handleItemClick() {
+				uni.navigateTo({
+					url: "../../pages/index/index-detail/index-detail?indexItem=" + JSON.stringify(this.itemData)
+				})
+			}
 		}
 	}
 </script>
