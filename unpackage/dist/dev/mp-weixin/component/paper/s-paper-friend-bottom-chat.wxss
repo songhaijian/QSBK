@@ -24,52 +24,38 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.friend_item_wrap.data-v-35d365a7 {
-  margin: 0 20rpx;
+.bottom_input_wrap.data-v-281fdd6a {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
   padding: 20rpx 0;
+  border-top: 1rpx solid #EEEEEE;
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center;
-  border-bottom: 1rpx solid #EEEEEE;
+  background-color: #fff;
 }
-.friend_item_wrap image.data-v-35d365a7 {
-  width: 100rpx;
-  height: 100rpx;
-  border-radius: 50%;
-}
-.friend_item_wrap .friend_item_middle.data-v-35d365a7 {
+.bottom_input_wrap input.data-v-281fdd6a {
   margin-left: 20rpx;
   -webkit-box-flex: 1;
   -webkit-flex: 1;
           flex: 1;
-}
-.friend_item_wrap .friend_item_middle .nickname.data-v-35d365a7 {
+  background-color: #f7f7f7;
+  border-radius: 10rpx;
   font-size: 30rpx;
+  padding: 10rpx;
 }
-.friend_item_wrap .friend_item_middle .sex_wrap.data-v-35d365a7 {
-  background-color: #43b3ff;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: inline-flex;
-  height: 30rpx;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center;
+.bottom_input_wrap .icon-fabu.data-v-281fdd6a {
+  width: 100rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
           justify-content: center;
-  border-radius: 20rpx;
-  padding: 0 10rpx;
-  color: #fff;
-}
-.friend_item_wrap .friend_item_middle .sex_wrap .icon-nan.data-v-35d365a7, .friend_item_wrap .friend_item_middle .sex_wrap .age.data-v-35d365a7 {
-  font-size: 22rpx;
-}
-.friend_item_wrap .icon-zengjia1.data-v-35d365a7 {
-  padding: 0 20rpx;
-  color: #f87a1d;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
 }
 

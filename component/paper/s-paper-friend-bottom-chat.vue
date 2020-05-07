@@ -31,6 +31,7 @@
 		padding: 20rpx 0;
 		border-top: 1rpx solid #EEEEEE;
 		display: flex;
+		background-color: #fff;
 
 		input {
 			margin-left: 20rpx;
