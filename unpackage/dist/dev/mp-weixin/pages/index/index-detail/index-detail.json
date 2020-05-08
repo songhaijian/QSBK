@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "index-detail-item": "/component/index/index-detail-item"
+  }
+}

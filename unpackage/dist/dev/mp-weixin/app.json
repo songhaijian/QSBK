@@ -9,7 +9,8 @@
     "pages/news/topic-sort/topic-sort",
     "pages/news/hot-sort-detail/hot-sort-detail",
     "pages/paper/s-paper-friend-list/s-paper-friend-list",
-    "pages/paper/s-paper-chat/s-paper-chat"
+    "pages/paper/s-paper-chat/s-paper-chat",
+    "pages/index/index-detail/index-detail"
   ],
   "subPackages": [],
   "window": {
