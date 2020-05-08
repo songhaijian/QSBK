@@ -76,7 +76,16 @@
 		{
 			"path": "pages/mine/mine",
 			"style": {
-				"navigationBarTitleText": "我的"
+				"navigationBarTitleText": "我的",
+				"app-plus": {
+					"scrollIndicator": "none",
+					"titleNView": {
+						"buttons": [{
+							"float": "right",
+							"type": "menu"
+						}]
+					}
+				}
 			}
 		}, {
 			"path": "pages/index/search-index/search-index",
@@ -130,7 +139,7 @@
 			"path": "pages/paper/s-paper-friend-list/s-paper-friend-list",
 			"style": {
 				"app-plus": {
-					"animationType":"slide-in-left",
+					"animationType": "slide-in-left",
 					"titleNView": {
 						"autoBackButton": false,
 						"searchInput": {
@@ -138,7 +147,7 @@
 							"borderRadius": "10rpx",
 							"backgroundColor": "#f7f7f7",
 							"placeholderColor": "#cdcdcd",
-							"align":"left"
+							"align": "left"
 						},
 						"buttons": [{
 							"float": "right",
@@ -148,40 +157,36 @@
 					}
 				}
 			}
-		}
-	    ,{
-            "path" : "pages/paper/s-paper-chat/s-paper-chat",
-            "style" : {
-				"navigationBarTitleText":"聊天页",
-				"app-plus":{
-					"scrollIndicator":"none",
-					"titleNView":{
-						"buttons":[
-							{
-								"float":"right",
-								"fontSrc": "/static/font/icon.ttf",
-								"text":"\ue628",
-								"fontSize":"40rpx"
-							}
-						]
-					}
-				}
-			}
-        }
-        ,{
-            "path" : "pages/index/index-detail/index-detail",
-            "style" : {
-				"app-plus":{
-					"titleNView":{
-						"buttons":[{
-							"float":"right",
-							"type":"menu"
+		}, {
+			"path": "pages/paper/s-paper-chat/s-paper-chat",
+			"style": {
+				"navigationBarTitleText": "聊天页",
+				"app-plus": {
+					"scrollIndicator": "none",
+					"titleNView": {
+						"buttons": [{
+							"float": "right",
+							"fontSrc": "/static/font/icon.ttf",
+							"text": "\ue628",
+							"fontSize": "40rpx"
 						}]
 					}
 				}
 			}
-        }
-    ],
+		}, {
+			"path": "pages/index/index-detail/index-detail",
+			"style": {
+				"app-plus": {
+					"titleNView": {
+						"buttons": [{
+							"float": "right",
+							"type": "menu"
+						}]
+					}
+				}
+			}
+		}
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "仿糗事百科",
