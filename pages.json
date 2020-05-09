@@ -185,6 +185,31 @@
 					}
 				}
 			}
+		}, {
+			"path": "pages/mine/mine-seeting/mine-seeting",
+			"style": {
+				"navigationBarTitleText": "设置"
+			}
+		}, {
+			"path": "pages/mine/mine-change-pwd/mine-change-pwd",
+			"style": {
+				"navigationBarTitleText": "修改密码"
+			}
+		}, {
+			"path": "pages/mine/mine-change-email/mine-change-email",
+			"style": {
+				"navigationBarTitleText": "绑定邮箱"
+			}
+		}, {
+			"path": "pages/mine/mine-change-userinfo/mine-change-userinfo",
+			"style": {
+				"navigationBarTitleText": "修改资料"
+			}
+		}, {
+			"path": "pages/mine/mine-feedback/mine-feedback",
+			"style": {
+				"navigationBarTitleText": "意见反馈"
+			}
 		}
 	],
 	"globalStyle": {

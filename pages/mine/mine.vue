@@ -79,7 +79,9 @@
 
 		},
 		onNavigationBarButtonTap(e) {
-			console.log(e.index)
+			uni.navigateTo({
+				url:"./mine-seeting/mine-seeting"
+			})
 		}
 	}
 </script>

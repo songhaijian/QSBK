@@ -1,6 +1,6 @@
 <template>
-	<view class="list_item_wrap">
-		<view class="iconfont list_item_left_icon" :class="listItem.icon" :style="{color:listItem.iconColor}">
+	<view class="list_item_wrap" @click="handleItemClick">
+		<view v-if="listItem.icon" class="iconfont list_item_left_icon" :class="listItem.icon" :style="{color:listItem.iconColor}">
 
 		</view>
 		<view class="list_item_title">
@@ -16,6 +16,21 @@
 	export default {
 		props: {
 			listItem: Object
+		},
+		methods: {
+			handleItemClick() {
+				if (this.listItem.navigatorUrl != null) {
+					if (this.listItem.navigatorType == 'navigatorTo') {
+						uni.navigateTo({
+							url: this.listItem.navigatorUrl
+						})
+					} else if (this.listItem.navigatorType == 'switchTab') {
+						uni.switchTab({
+							url: this.listItem.navigatorUrl
+						})
+					}
+				}
+			}
 		}
 	}
 </script>
