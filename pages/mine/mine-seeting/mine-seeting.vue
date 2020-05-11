@@ -57,7 +57,9 @@
 					{
 						icon: "",
 						iconColor: "",
-						title: "关于仿糗百"
+						title: "关于仿糗百",
+						navigatorType: "navigatorTo",
+						navigatorUrl: "/pages/mine/mine-about/mine-about"
 					}
 				]
 			}

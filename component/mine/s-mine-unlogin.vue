@@ -14,7 +14,7 @@
 
 			</view>
 		</view>
-		<view class="unlogin_account_login_wrap">
+		<view class="unlogin_account_login_wrap" @click="handleLogin">
 			账号密码登录
 			<view class="iconfont icon-jinru">
 
@@ -24,6 +24,15 @@
 </template>
 
 <script>
+	export default {
+		methods: {
+			handleLogin() {
+				uni.navigateTo({
+					url:"/pages/mine/mine-login/mine-login" 
+				})
+			}
+		}
+	}
 </script>
 
 <style lang="scss" scoped>

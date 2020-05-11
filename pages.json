@@ -210,6 +210,18 @@
 			"style": {
 				"navigationBarTitleText": "意见反馈"
 			}
+		}, {
+			"path": "pages/mine/mine-about/mine-about",
+			"style": {
+				"navigationBarTitleText": "关于仿糗百"
+			}
+		}, {
+			"path": "pages/mine/mine-login/mine-login",
+			"style": {
+				"app-plus": {
+					"titleNView": false
+				}
+			}
 		}
 	],
 	"globalStyle": {
