@@ -10,22 +10,23 @@
 		<view class="auth_code_login_wrap" v-if="!accountLogin">
 			<view class="phone_wrap">
 				+86
-				<input type="text" placeholder="输入手机号" class="uni-input" />
+				<input type="text" placeholder="输入手机号" class="uni-input" v-model="phoneNum" />
 			</view>
 			<view class="auth_code_wrap">
-				<input type="text" placeholder="请输入验证码" class="uni-input" />
-				<button type="default">获取验证码</button>
+				<input type="text" placeholder="请输入验证码" class="uni-input" v-model="authCode" />
+				<button type="default" @click="handleGetMegCode">{{codeTime?codeTime + "秒":"获取验证码"}}</button>
 			</view>
 		</view>
 		<view class="account_login_wrap" v-if="accountLogin">
 			<view class="account_wrap">
-				<input type="text" placeholder="输入手机号" class="uni-input" />
+				<input type="text" placeholder="昵称/手机号/邮箱" class="uni-input" v-model="accountNum" />
 			</view>
 			<view class="password_wrap">
-				<input type="text" placeholder="请输入密码" class="uni-input" />
+				<input type="text" placeholder="请输入密码" class="uni-input" v-model="pwdNum" />
 				<view>忘记密码?</view>
 			</view>
 		</view>
+		<button type="default" class="login_btn" :class="{btn_active:!btnDisable}" :disabled="!btnClick" @click="handleLogin">登录</button>
 		<view class="switch_login_wrap" @click="handleSwitchLoginType">
 			账号密码登录
 			<view class="iconfont icon-jinru">
@@ -62,7 +63,14 @@
 		data() {
 			return {
 				statuesColor: "#ffe933",
-				accountLogin: false
+				accountLogin: false,
+				codeTime: 0,
+				btnDisable: true,
+				btnClick: false,
+				phoneNum: "",
+				authCode: "",
+				accountNum: "",
+				pwdNum: ""
 			}
 		},
 		methods: {
@@ -73,6 +81,77 @@
 			},
 			handleSwitchLoginType() {
 				this.accountLogin = !this.accountLogin
+				this.phoneNum = ""
+				this.authCode = ""
+				this.accountNum = ""
+				this.pwdNum = ""
+			},
+			handleGetMegCode() {
+				if (!this.isValidPhone()) {
+					uni.showToast({
+						title: "请输入合法的手机号",
+						icon: "none"
+					})
+					return;
+				}
+				if (this.codeTime > 0) {
+					return;
+				}
+				this.codeTime = 10
+				var timer = setInterval(() => {
+					this.codeTime--
+					if (this.codeTime < 1) {
+						clearInterval(timer)
+					}
+				}, 1000)
+			},
+			handleLogin() {
+				console.log("dsfsdf")
+			},
+			isValidPhone() {
+				if (!(/^1[34578]\d{9}$/.test(this.phoneNum))) {
+					return false
+				} else {
+					return true
+				}
+			}
+		},
+		watch: {
+			phoneNum(val) {
+				if (this.phoneNum && this.phoneNum != null && this.authCode && this.authCode != null) {
+					this.btnDisable = false
+					this.btnClick = true
+				} else {
+					this.btnDisable = true
+					this.btnClick = false
+				}
+			},
+			authCode(val) {
+				if (this.phoneNum && this.phoneNum != null && this.authCode && this.authCode != null) {
+					this.btnDisable = false
+					this.btnClick = true
+				} else {
+					this.btnDisable = true
+					this.btnClick = false
+				}
+			},
+			accountNum(val) {
+				if (this.accountNum && this.accountNum != null && this.pwdNum && this.pwdNum != null) {
+					this.btnDisable = false
+					this.btnClick = true
+				} else {
+					this.btnDisable = true
+					this.btnClick = false
+				}
+			},
+			pwdNum(val) {
+				if (this.accountNum && this.accountNum != null && this.pwdNum && this.pwdNum != null) {
+					this.btnDisable = false
+					this.btnClick = true
+				} else {
+					this.btnDisable = true
+					this.btnClick = false
+				}
 			}
 		}
 	}
@@ -148,6 +227,16 @@
 				justify-content: center;
 			}
 		}
+	}
+
+	.login_btn {
+		margin: 20rpx;
+		color: #909090;
+	}
+
+	.btn_active {
+		background-color: #ffe933;
+		color: #000;
 	}
 
 	.switch_login_wrap {
