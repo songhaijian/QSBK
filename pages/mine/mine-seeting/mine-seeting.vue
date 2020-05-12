@@ -45,7 +45,9 @@
 					{
 						icon: "",
 						iconColor: "",
-						title: "清除缓存"
+						title: "清除缓存",
+						navigatorType: "clear",
+						navigatorUrl: ""
 					},
 					{
 						icon: "",

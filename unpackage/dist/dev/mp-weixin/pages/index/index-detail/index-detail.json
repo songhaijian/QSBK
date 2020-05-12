@@ -1,5 +1,8 @@
 {
   "usingComponents": {
-    "index-detail-item": "/component/index/index-detail-item"
+    "index-detail-item": "/component/index/index-detail-item",
+    "s-index-detail-comment-item": "/component/index/s-index-detail-comment-item",
+    "s-paper-friend-bottom-chat": "/component/paper/s-paper-friend-bottom-chat",
+    "s-share-dialog": "/component/common/s-share-dialog"
   }
 }

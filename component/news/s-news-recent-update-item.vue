@@ -1,5 +1,5 @@
 <template>
-	<view class="recent_update_item" @click="haneleItemClick">
+	<view class="recent_update_item animated fadeInDown fast" @click="haneleItemClick">
 		<view class="recent_update_item_left">
 			<image :src="recentItem.imagePath" mode="widthFix"></image>
 		</view>

@@ -1,5 +1,5 @@
 <template>
-	<view class="commen_list">
+	<view class="commen_list animated fadeInDown fast">
 		<view class="head_img_wrap">
 			<image :src="item.userPic" mode="widthFix"></image>
 		</view>

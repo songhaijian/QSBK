@@ -72,16 +72,53 @@
 						title: "审核糗事"
 					}
 				],
-				isLogin: false
+				isLogin: true,
+				providerList: []
 			}
 		},
 		methods: {
-
+			getLoginChannel() {
+				uni.getProvider({
+					service: 'oauth',
+					success: (result) => {
+						this.providerList = result.provider.map((value) => {
+							let providerName = '';
+							let icon = ''
+							switch (value) {
+								case 'weixin':
+									providerName = '微信登录'
+									icon = 'weixin'
+									break;
+								case 'qq':
+									providerName = 'QQ登录'
+									icon = 'QQ'
+									break;
+								case 'sinaweibo':
+									providerName = '新浪微博登录'
+									icon = 'xinlangweibo'
+									break;
+							}
+							return {
+								name: providerName,
+								id: value,
+								loginIcon:icon
+							}
+						});
+						// console.log(JSON.stringify(this.providerList))
+					},
+					fail: (error) => {
+						console.log('获取登录通道失败', error);
+					}
+				});
+			}
 		},
 		onNavigationBarButtonTap(e) {
 			uni.navigateTo({
-				url:"./mine-seeting/mine-seeting"
+				url: "./mine-seeting/mine-seeting"
 			})
+		},
+		onLoad() {
+			this.getLoginChannel()
 		}
 	}
 </script>

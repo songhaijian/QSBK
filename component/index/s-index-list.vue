@@ -1,5 +1,5 @@
 <template>
-	<view v-if="itemData.tag=='video'" class="item_wrap" @click="handleItemClick">
+	<view v-if="itemData.tag=='video'" class="item_wrap animated fadeInDown fast" @click="handleItemClick">
 		<view class="item_line1">
 			<view class="line1_left">
 				<image :src="itemData.user.thumb" mode="widthFix" lazy-load=""></image>
@@ -86,6 +86,7 @@
 				display: flex;
 
 				image {
+					will-change: transform;
 					width: 80rpx;
 					height: 80rpxx;
 					border-radius: 50%;
@@ -105,6 +106,7 @@
 						}
 
 						image {
+							will-change: transform;
 							margin-left: 10rpx;
 							width: 30rpx;
 							height: 30rpx;
@@ -137,6 +139,7 @@
 		.item_line3 {
 			image {
 				width: 100%;
+				will-change: transform;
 			}
 		}
 

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "设置",
+  "usingComponents": {
+    "s-mine-list-item": "/component/mine/s-mine-list-item"
+  }
+}

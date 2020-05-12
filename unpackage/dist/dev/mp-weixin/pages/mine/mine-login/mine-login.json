@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "uni-status-bar": "/component/index/uni-status-bar",
+    "s-mine-third-login": "/component/mine/s-mine-third-login"
+  }
+}

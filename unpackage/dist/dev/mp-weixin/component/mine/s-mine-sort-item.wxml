@@ -1,0 +1,1 @@
+<view class="sort_item data-v-5d1a8068"><view class="sort_count data-v-5d1a8068">{{''+sortItem.count+''}}</view><view class="sort_name data-v-5d1a8068">{{''+sortItem.name+''}}</view></view>

@@ -222,6 +222,19 @@
 					"titleNView": false
 				}
 			}
+		}, {
+			"path": "pages/mine/mine-user-space/mine-user-space",
+			"style": {
+				"app-plus": {
+					"titleNView": {
+						"type": "transparent",
+						"buttons": [{
+							"float": "right",
+							"type": "menu"
+						}]
+					}
+				}
+			}
 		}
 	],
 	"globalStyle": {

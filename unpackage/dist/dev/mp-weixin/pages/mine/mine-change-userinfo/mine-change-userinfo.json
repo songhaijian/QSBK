@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "修改资料",
+  "usingComponents": {
+    "s-mine-change-userinfo-item": "/component/mine/s-mine-change-userinfo-item"
+  }
+}

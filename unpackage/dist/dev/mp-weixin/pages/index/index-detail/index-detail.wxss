@@ -27,4 +27,15 @@
 .index_detail_top.data-v-597c0007 {
   border-bottom: 2rpx solid #eeeeee;
 }
+.comment_list_wrap.data-v-597c0007 {
+  padding: 20rpx;
+}
+.comment_list_wrap .comment_count_wrap.data-v-597c0007 {
+  color: #000000;
+  font-size: 30rpx;
+  font-weight: 600;
+}
+.bottom_chat_wrap.data-v-597c0007 {
+  height: 100rpx;
+}
 

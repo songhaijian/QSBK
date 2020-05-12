@@ -42,7 +42,7 @@
 
 			</view>
 		</view>
-		<s-mine-third-login></s-mine-third-login>
+		<s-mine-third-login :providerList="providerList"></s-mine-third-login>
 		<view class="agreement_wrap">
 			注册即代表您同意
 			<view class="aggrement">
@@ -70,8 +70,12 @@
 				phoneNum: "",
 				authCode: "",
 				accountNum: "",
-				pwdNum: ""
+				pwdNum: "",
+				providerList: []
 			}
+		},
+		onLoad() {
+			this.getLoginChannel()
 		},
 		methods: {
 			handleClose() {
@@ -114,6 +118,39 @@
 				} else {
 					return true
 				}
+			},
+			getLoginChannel() {
+				uni.getProvider({
+					service: 'oauth',
+					success: (result) => {
+						this.providerList = result.provider.map((value) => {
+							let providerName = '';
+							let icon = ''
+							switch (value) {
+								case 'weixin':
+									providerName = '微信登录'
+									icon = 'weixin'
+									break;
+								case 'qq':
+									providerName = 'QQ登录'
+									icon = 'QQ'
+									break;
+								case 'sinaweibo':
+									providerName = '新浪微博登录'
+									icon = 'xinlangweibo'
+									break;
+							}
+							return {
+								name: providerName,
+								id: value,
+								loginIcon: icon
+							}
+						});
+					},
+					fail: (error) => {
+						console.log('获取登录通道失败', error);
+					}
+				});
 			}
 		},
 		watch: {

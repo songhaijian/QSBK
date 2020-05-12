@@ -1,4 +1,9 @@
 {
   "navigationBarTitleText": "我的",
-  "usingComponents": {}
+  "usingComponents": {
+    "s-mine-sort-item": "/component/mine/s-mine-sort-item",
+    "s-mine-list-item": "/component/mine/s-mine-list-item",
+    "s-mine-unlogin": "/component/mine/s-mine-unlogin",
+    "s-mine-login": "/component/mine/s-mine-login"
+  }
 }

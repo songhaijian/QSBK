@@ -1,5 +1,5 @@
 <template>
-	<view class="login_wrap">
+	<view class="login_wrap" @click="handleUserSpace">
 		<view class="head_img_wrap">
 			<image src="../../static/userpic/2.jpg" mode="widthFix"></image>
 		</view>
@@ -23,6 +23,15 @@
 </template>
 
 <script>
+	export default {
+		methods:{
+			handleUserSpace(){
+				uni.navigateTo({
+					url:"/pages/mine/mine-user-space/mine-user-space"
+				})
+			}
+		}
+	}
 </script>
 
 <style lang="scss" scoped>

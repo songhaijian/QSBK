@@ -2,6 +2,7 @@
 	export default {
 		onLaunch: function() {
 			console.log('App Launch')
+			this.utils.NetWork.on()
 		},
 		onShow: function() {
 			console.log('App Show')
