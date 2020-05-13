@@ -1,12 +1,12 @@
 <template>
-	<view v-if="itemData.tag=='video'" class="item_wrap animated fadeInDown fast" @click="handleItemClick">
+	<view class="item_wrap animated fadeInDown fast" @click="handleItemClick">
 		<view class="item_line1">
 			<view class="line1_left">
-				<image :src="itemData.user.thumb" mode="widthFix" lazy-load=""></image>
+				<image :src="getHeadImg" mode="aspectFill" lazy-load="true"></image>
 				<view class="user_wrap">
 					<view class="name_wrap">
 						<view class="nickname">
-							{{itemData.user.login}}
+							{{itemData.user.username}}
 						</view>
 						<image v-if="itemData.user.titles != null" :src="itemData.user.titles[0].icon" mode="widthFix"></image>
 					</view>
@@ -23,13 +23,13 @@
 		<view class="item_line2">
 			{{itemData.content}}
 		</view>
-		<view class="item_line3">
-			<image :src="itemData.share_url" mode="widthFix"></image>
+		<view v-if="itemData.titlepic" class="item_line3">
+			<image :src="itemData.titlepic" mode="scaleToFill" lazy-load="true"></image>
 		</view>
 		<view class="item_line4">
 			<view class="left_wrap iconfont icon-icon_xiaolian-mian">
 				<view class="like_num">
-					1234
+					{{itemData.ding_count}}
 				</view>
 				<view class="hate_num iconfont icon-kulian">
 
@@ -40,13 +40,13 @@
 
 				</view>
 				<view class="comment_num">
-					{{itemData.comments_count}}
+					{{itemData.comment_count}}
 				</view>
 				<view class="iconfont icon-zhuanfa">
 
 				</view>
 				<view class="share_num ">
-					{{itemData.share_count}}
+					{{itemData.sharenum}}
 				</view>
 			</view>
 		</view>
@@ -64,8 +64,17 @@
 		methods: {
 			handleItemClick() {
 				uni.navigateTo({
-					url: "../../pages/index/index-detail/index-detail?indexItem=" + JSON.stringify(this.itemData)
+					url: "/pages/index/index-detail/index-detail?indexItem=" + JSON.stringify(this.itemData)
 				})
+			}
+		},
+		computed: {
+			getHeadImg() {
+				if (this.itemData.user.userpic == null) {
+					return "/static/userpic/12.jpg"
+				} else {
+					return this.itemData.user.userpic
+				}
 			}
 		}
 	}
@@ -88,7 +97,7 @@
 				image {
 					will-change: transform;
 					width: 80rpx;
-					height: 80rpxx;
+					height: 80rpx;
 					border-radius: 50%;
 				}
 
@@ -139,7 +148,9 @@
 		.item_line3 {
 			image {
 				width: 100%;
+				height: 300rpx;
 				will-change: transform;
+				border-radius: 10rpx;
 			}
 		}
 

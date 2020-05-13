@@ -1,15 +1,15 @@
 <template>
 	<view class="comment_item_wrap" :class="{apply_comment_wrap:commentItem.pId>0}">
-		<image :src="commentItem.headImg" mode="widthFix"></image>
+		<image :src="commentItem.user.userpic" mode="aspectFill"></image>
 		<view class="comment_item_right_wrap">
 			<view class="comment_item_line1">
-				{{commentItem.userName}}
+				{{commentItem.user.username}}
 			</view>
 			<view class="comment_item_line2">
-				{{commentItem.commentContent}}
+				{{commentItem.data}}
 			</view>
 			<view class="comment_item_line3">
-				{{commentItem.newTime}}
+				{{commentItem.create_time}}
 			</view>
 		</view>
 	</view>

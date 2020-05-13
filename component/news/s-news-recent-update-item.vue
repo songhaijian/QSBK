@@ -1,7 +1,7 @@
 <template>
 	<view class="recent_update_item animated fadeInDown fast" @click="haneleItemClick">
 		<view class="recent_update_item_left">
-			<image :src="recentItem.imagePath" mode="widthFix"></image>
+			<image :src="recentItem.titlepic" mode="aspectFill"></image>
 		</view>
 		<view class="recent_update_item_right">
 			<view class="recent_update_item_right_line1">
@@ -12,10 +12,10 @@
 			</view>
 			<view class="recent_update_item_right_line3">
 				<view class="news_num_wrap">
-					动态{{recentItem.newsNum}} 
+					动态{{recentItem.post_count}} 
 				</view>
 				<view class="today_num_wrap">
-					今日{{recentItem.todayNum}}
+					今日{{recentItem.todaypost_count}}
 				</view>
 			</view>
 		</view>
@@ -68,7 +68,9 @@
 	
 				.news_num_wrap {}
 	
-				.today_num_wrap {}
+				.today_num_wrap {
+					margin-left: 10rpx;
+				}
 			}
 		}
 	}

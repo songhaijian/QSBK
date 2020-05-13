@@ -6,8 +6,8 @@
 				<scroll-view scroll-y="true" :style="{height:swiperHeight+'px'}" @scrolltolower="handleReachBottom">
 					<block v-for="(item,index) in listData" :key="index">
 						<s-index-list :itemData="item"></s-index-list>
-					</block>
-					<s-load-more :loadText="loadText"></s-load-more>
+					</block> 
+					<!-- <s-load-more :loadText="loadText" v-if="tabBars[tabIndex].currentPageNum>1"></s-load-more> -->
 				</scroll-view>
 			</swiper-item>
 		</swiper>
@@ -24,7 +24,7 @@
 			sLoadMore
 		},
 		onLoad() {
-			this.getListData()
+			this.getTabList()
 			uni.getSystemInfo({
 				success: (res) => {
 					let height = res.windowHeight - uni.upx2px(80)
@@ -35,38 +35,11 @@
 		data() {
 			return {
 				swiperHeight: 600,
-				listData: [],
 				tabIndex: 1,
-				tabBars: [{
-					name: '关注',
-					id: 'guanzhu'
-				}, {
-					name: '推荐',
-					id: 'tuijian'
-				}, {
-					name: '体育',
-					id: 'tiyu'
-				}, {
-					name: '热点',
-					id: 'redian'
-				}, {
-					name: '财经',
-					id: 'caijing'
-				}, {
-					name: '娱乐',
-					id: 'yule'
-				}, {
-					name: '军事',
-					id: 'junshi'
-				}, {
-					name: '历史',
-					id: 'lishi'
-				}, {
-					name: '本地',
-					id: 'bendi'
-				}],
+				tabBars: [],
 				scrollInto: "",
-				loadText: "上拉加载更多..."
+				loadText: "上拉加载更多...",
+				listData: []
 			}
 		},
 		methods: {
@@ -75,20 +48,50 @@
 				this.tabIndex = index
 				this.scrollInto = this.tabBars[index].id
 			},
-			// 获取列表数据K
-			getListData() {
-				this.request({
-					url: "https://m2.qiushibaike.com/article/newlist?new=1&readarticles=[123018375]"
-				}).then(result => {
-					this.listData = [...this.listData, ...result.items]
-					this.loadText = "上拉加载更多..."
-					// this.listData = result.items
-				})
-			},
+			//滑动切换
 			handleSwiperChange(e) {
 				this.tabIndex = e.detail.current
 				this.scrollInto = this.tabBars[e.detail.current].id
+				if (this.tabBars[this.tabIndex].listData.length <= 0) {
+					this.getListData()
+				} else {
+					this.listData = this.tabBars[this.tabIndex].listData
+				}
 			},
+			//获取tablist数据
+			getTabList() {
+				this.request({
+					url: this.config.BASE_URL + "postclass"
+				}).then(result => {
+					this.tabBars = result.data.list
+					this.tabBars.forEach(v => {
+						v.name = v.classname
+						v.tabId = v.id
+						v.id = "id" + v.id
+						v.currentPageNum = 1
+						v.listData = []
+					})
+					this.getListData()
+				})
+			},
+			// 获取列表数据
+			getListData() {
+				// this.listData = []
+				this.request({
+					url: this.config.BASE_URL + "postclass/" + this.tabBars[this.tabIndex].tabId + "/post/" + this.tabBars[this.tabIndex]
+						.currentPageNum
+				}).then(res => {
+					if (res.data.list.length <= 0) {
+						return uni.showToast({
+							title: "没有更多数据了"
+						})
+					}
+					this.tabBars[this.tabIndex].listData = [...this.tabBars[this.tabIndex].listData, ...res.data.list]
+					this.tabBars[this.tabIndex].currentPageNum = this.tabBars[this.tabIndex].currentPageNum + 1
+					this.listData = this.tabBars[this.tabIndex].listData
+				})
+			},
+			//到达底部
 			handleReachBottom() {
 				this.loadText = "加载中..."
 				this.getListData()

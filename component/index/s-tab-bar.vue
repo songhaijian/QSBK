@@ -38,6 +38,7 @@
 <style lang="scss" scoped>
 	.tab_bar_wrap {
 		padding-right: 20rpx;
+		text-align: center;
 
 		.tab_scroll {
 			white-space: nowrap; // 滚动必须加的属性

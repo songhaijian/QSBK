@@ -1,19 +1,19 @@
 <template>
 	<view class="commen_list">
 		<view class="head_img_wrap">
-			<image :src="item.userPic" mode="widthFix"></image>
+			<image :src="getHeadImg" mode="aspectFill"></image>
 		</view>
 		<view class="item_right_wrap">
 			<view class="item_line1">
 				<view class="nickname_wrap">
 					<view class="nickname">
-						{{item.userName}}
+						{{item.user.username}}
 					</view>
 					<view class="sex_age_wrap">
-						<view class="iconfont" :class="[item.sex==0?'icon-nan':'icon-nv']">
+						<view class="iconfont" :class="[item.user.userinfo.sex==1?'icon-nan':'icon-nv']">
 
 						</view>
-						{{item.age}}
+						{{item.user.userinfo.age}}
 					</view>
 
 				</view>
@@ -27,14 +27,14 @@
 				</view>
 			</view>
 			<view class="item_line_time">
-				{{item.time}}
+				{{formatTime}}
 			</view>
 			<view class="item_line2">
-				{{item.title}}
+				{{item.content}}
 			</view>
 			<view class="item_line3">
-				<block v-for="(imgItem,imgIndex) in item.titlePicArr" :key="imgIndex">
-					<image :src="imgItem" mode="widthFix" @click="handleImgItemClick(imgIndex)"></image>
+				<block v-for="(imgItem,imgIndex) in item.images" :key="imgIndex">
+					<image :src="imgItem.url" mode="aspectFill" @click="handleImgItemClick(imgIndex)"></image>
 				</block>
 
 				<template v-if="item.video">
@@ -48,9 +48,9 @@
 
 			</view>
 			<view v-if="item.share" class="item_line3_share">
-				<image :src="item.share.shareImg" mode=""></image>
+				<image :src="item.titlepic" mode=""></image>
 				<view class="share_text_wrap">
-					{{item.share.shareTitle}}
+					{{item.content}}
 				</view>
 			</view>
 			<view class="item_line4">
@@ -59,13 +59,13 @@
 				</view>
 				<view class="share_and_commen_wrap">
 					<view class="iconfont icon-zhuanfa">
-						{{item.shareNum}}
+						{{item.sharenum}}
 					</view>
 					<view class="iconfont icon-pinglun1">
-						{{item.commentNum}}
+						{{item.comment_count}}
 					</view>
 					<view class="iconfont icon-dianzan">
-						{{item.favNum}}
+						{{item.ding_count}}
 					</view>
 				</view>
 			</view>
@@ -74,6 +74,7 @@
 </template>
 
 <script>
+	import time from "../../commen/time.js"
 	export default {
 		props: {
 			item: Object
@@ -91,13 +92,29 @@
 				})
 			},
 			//图片点击事件
-			handleImgItemClick(index){
+			handleImgItemClick(index) {
+				const imgArr = []
+				this.item.images.forEach(v => {
+					imgArr.push(v.url)
+				})
 				uni.previewImage({
-					urls:this.item.titlePicArr,
-					current:index
+					urls: imgArr,
+					current: index
 				})
 			}
 		},
+		computed: {
+			getHeadImg() {
+				if (this.item.user.userpic == null) {
+					return "/static/userpic/12.jpg"
+				} else {
+					return this.item.user.userpic
+				}
+			},
+			formatTime(){
+				return time.gettime.gettime(this.item.create_time)
+			}
+		}
 	}
 </script>
 
@@ -189,6 +206,7 @@
 				image {
 					margin-top: 20rpx;
 					width: 100%;
+					height: 300rpx;
 					border-radius: 10rpx;
 				}
 

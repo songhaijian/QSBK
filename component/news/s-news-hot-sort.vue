@@ -14,7 +14,7 @@
 		<view class="hot_sort_line2">
 			<block v-for="(hotSortItem,hotSortIndex) in hotSortTypeList" :key="hotSortIndex">
 				<view class="hot_sort_line2_item">
-					{{hotSortItem.title}}
+					{{hotSortItem.classname}}
 				</view>
 			</block>
 		</view>
@@ -29,7 +29,7 @@
 		methods:{
 			handleMore(){
 				uni.navigateTo({
-					url:"../../pages/news/topic-sort/topic-sort"
+					url:"/pages/news/topic-sort/topic-sort"
 				})
 			}
 		}

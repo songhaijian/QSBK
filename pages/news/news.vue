@@ -22,20 +22,20 @@
 						<!-- 轮播图 -->
 						<swiper class="swiper_wrap" :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000" :circular="true"
 						 :indicator-active-color="activeColor" :indicator-color="defaultColor">
-							<block v-for="(swiperItem,swiperIndex) in topicData.swiperList" :key="swiperIndex">
+							<block v-for="(swiperItem,swiperIndex) in swiperList" :key="swiperIndex">
 								<swiper-item>
-									<image :src="swiperItem.imagePath" mode="widthFix"></image>
+									<image :src="swiperItem.src" mode="widthFix"></image>
 								</swiper-item>
 							</block>
 						</swiper>
 						<!-- 热门分类 -->
-						<s-news-hot-sort :hotSortTypeList="topicData.hotSortTypeList"></s-news-hot-sort>
+						<s-news-hot-sort :hotSortTypeList="hotSortTypeList"></s-news-hot-sort>
 						<!-- 列表 -->
 						<view class="recent_update_wrap">
 							<view class="recent_update_title">
 								最近更新
 							</view>
-							<block v-for="(recentItem,recentIndex) in topicData.recentUpdateList" :key="recentIndex">
+							<block v-for="(recentItem,recentIndex) in recentUpdateList" :key="recentIndex">
 								<s-news-recent-update-item :recentItem="recentItem"></s-news-recent-update-item>
 							</block>
 						</view>
@@ -69,6 +69,9 @@
 					this.swiperHeight = height;
 				}
 			})
+			this.getSwiperList()
+			this.getHotSortTypeList()
+			this.getRecentUpdateList()
 		},
 		data() {
 			return {
@@ -158,71 +161,9 @@
 				},
 				activeColor: "#fff",
 				defaultColor: "#000",
-				topicData: {
-					"swiperList": [{
-						"imagePath": "../../static/banner1.jpg"
-					}, {
-						"imagePath": "../../static/banner2.jpg"
-					}, {
-						"imagePath": "../../static/banner3.jpg"
-					}],
-					"hotSortTypeList": [{
-							"title": "最新"
-						},
-						{
-							"title": "游戏"
-						},
-						{
-							"title": "情感"
-						},
-						{
-							"title": "打卡"
-						},
-						{
-							"title": "故事"
-						},
-						{
-							"title": "喜爱"
-						}
-					],
-					"recentUpdateList": [{
-						imagePath: "../../static/topicpic/1.jpeg",
-						title: "淘宝记录簿",
-						desc: "120斤到85斤 我的反转人生",
-						newsNum: 545,
-						todayNum: 720
-					}, {
-						imagePath: "../../static/topicpic/2.jpeg",
-						title: "你起身经理的灵异事件",
-						desc: "走出去,才发现你跟别人差的不是一点半点",
-						newsNum: 577,
-						todayNum: 821
-					}, {
-						imagePath: "../../static/topicpic/3.jpeg",
-						title: "天天大卡",
-						desc: "面试官:在电梯里巧遇马云你会做什么?90后女孩的回答当场被录用",
-						newsNum: 507,
-						todayNum: 707
-					}, {
-						imagePath: "../../static/topicpic/4.jpeg",
-						title: "淘宝记录簿",
-						desc: "120斤到85斤 我的反转人生",
-						newsNum: 545,
-						todayNum: 720
-					}, {
-						imagePath: "../../static/topicpic/5.jpeg",
-						title: "你起身经理的灵异事件",
-						desc: "走出去,才发现你跟别人差的不是一点半点",
-						newsNum: 577,
-						todayNum: 821
-					}, {
-						imagePath: "../../static/topicpic/6.jpeg",
-						title: "天天大卡",
-						desc: "面试官:在电梯里巧遇马云你会做什么?90后女孩的回答当场被录用",
-						newsNum: 507,
-						todayNum: 707
-					}]
-				}
+				swiperList: [],
+				hotSortTypeList: [],
+				recentUpdateList: []
 			}
 		},
 		methods: {
@@ -243,6 +184,30 @@
 						this.newsList.loadText = "上拉加载更多..."
 					}, 1000)
 				}
+			},
+			//获取轮播图列表数据
+			getSwiperList() {
+				this.request({
+					url: this.config.BASE_URL + "adsense/0"
+				}).then(res => {
+					this.swiperList = res.data.list
+				})
+			},
+			//获取热门分类列表接口
+			getHotSortTypeList() {
+				this.request({
+					url: this.config.BASE_URL + "topicclass"
+				}).then(res => {
+					this.hotSortTypeList = res.data.list
+				})
+			},
+			//获取最近更新列表数据
+			getRecentUpdateList() {
+				this.request({
+					url: this.config.BASE_URL + "hottopic"
+				}).then(res => {
+					this.recentUpdateList = res.data.list
+				})
 			}
 		}
 	}

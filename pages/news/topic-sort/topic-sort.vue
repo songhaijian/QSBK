@@ -4,7 +4,7 @@
 		<swiper :style="{height:swiperHeight+'px'}" :current="tabIndex" @change="handleSwiperChange">
 			<swiper-item v-for="(pageItem,pageIndex) in tabBars" :key="pageIndex">
 				<scroll-view scroll-y="true" :style="{height:swiperHeight+'px'}" @scrolltolower="handleReachBottom" class="sc_wrap">
-					<block v-for="(recentItem,recentIndex) in topicData.recentUpdateList" :key="recentIndex">
+					<block v-for="(recentItem,recentIndex) in listData" :key="recentIndex">
 						<s-news-recent-update-item :recentItem="recentItem"></s-news-recent-update-item>
 					</block>
 				</scroll-view>
@@ -26,99 +26,8 @@
 				swiperHeight: 600,
 				scrollInto: "",
 				tabIndex: 0,
-				tabBars: [{
-					name: '关注',
-					id: 'guanzhu'
-				}, {
-					name: '推荐',
-					id: 'tuijian'
-				}, {
-					name: '体育',
-					id: 'tiyu'
-				}, {
-					name: '热点',
-					id: 'redian'
-				}, {
-					name: '财经',
-					id: 'caijing'
-				}, {
-					name: '娱乐',
-					id: 'yule'
-				}, {
-					name: '军事',
-					id: 'junshi'
-				}, {
-					name: '历史',
-					id: 'lishi'
-				}, {
-					name: '本地',
-					id: 'bendi'
-				}],
-				topicData: {
-					"swiperList": [{
-						"imagePath": "../../static/banner1.jpg"
-					}, {
-						"imagePath": "../../static/banner2.jpg"
-					}, {
-						"imagePath": "../../static/banner3.jpg"
-					}],
-					"hotSortTypeList": [{
-							"title": "最新"
-						},
-						{
-							"title": "游戏"
-						},
-						{
-							"title": "情感"
-						},
-						{
-							"title": "打卡"
-						},
-						{
-							"title": "故事"
-						},
-						{
-							"title": "喜爱"
-						}
-					],
-					"recentUpdateList": [{
-						imagePath: "../../../static/topicpic/1.jpeg",
-						title: "淘宝记录簿",
-						desc: "120斤到85斤 我的反转人生",
-						newsNum: 545,
-						todayNum: 720
-					}, {
-						imagePath: "../../../static/topicpic/2.jpeg",
-						title: "你起身经理的灵异事件",
-						desc: "走出去,才发现你跟别人差的不是一点半点",
-						newsNum: 577,
-						todayNum: 821
-					}, {
-						imagePath: "../../../static/topicpic/3.jpeg",
-						title: "天天大卡",
-						desc: "面试官:在电梯里巧遇马云你会做什么?90后女孩的回答当场被录用",
-						newsNum: 507,
-						todayNum: 707
-					}, {
-						imagePath: "../../../static/topicpic/4.jpeg",
-						title: "淘宝记录簿",
-						desc: "120斤到85斤 我的反转人生",
-						newsNum: 545,
-						todayNum: 720
-					}, {
-						imagePath: "../../../static/topicpic/5.jpeg",
-						title: "你起身经理的灵异事件",
-						desc: "走出去,才发现你跟别人差的不是一点半点",
-						newsNum: 577,
-						todayNum: 821
-					}, {
-						imagePath: "../../../static/topicpic/6.jpeg",
-						title: "天天大卡",
-						desc: "面试官:在电梯里巧遇马云你会做什么?90后女孩的回答当场被录用",
-						newsNum: 507,
-						todayNum: 707
-					}]
-				}
+				tabBars: [],
+				listData: []
 			}
 		},
 		onLoad() {
@@ -128,6 +37,7 @@
 					this.swiperHeight = height;
 				}
 			});
+			this.getSortList()
 		},
 		methods: {
 			//TabBar点击事件
@@ -138,9 +48,47 @@
 			handleSwiperChange(e) {
 				this.tabIndex = e.detail.current
 				this.scrollInto = this.tabBars[e.detail.current].id
+				if (this.tabBars[this.tabIndex].listData.length <= 0) {
+					this.getTopicList()
+				} else {
+					this.listData = this.tabBars[this.tabIndex].listData
+				}
 			},
 			handleReachBottom() {
-				this.topicData.recentUpdateList = [...this.topicData.recentUpdateList, ...this.topicData.recentUpdateList]
+				this.getTopicList()
+			},
+			//获取分类列表数据
+			getSortList() {
+				this.request({
+					url: this.config.BASE_URL + "topicclass"
+				}).then(res => {
+					res.data.list.forEach(v => {
+						v.name = v.classname
+						v.tabId = v.id
+						v.id = "id" + v.id
+						v.listData = []
+						v.currentPageNum = 1
+						this.tabBars.push(v)
+					})
+					this.getTopicList()
+				})
+			},
+			//获取话题分类列表
+			getTopicList() {
+				this.request({
+					url: this.config.BASE_URL + "topicclass/" + this.tabBars[this.tabIndex].tabId + "/topic/" + this.tabBars[this.tabIndex]
+						.currentPageNum
+				}).then(res => {
+					if (res.data.list.length <= 0) {
+						return uni.showToast({
+							title: "暂无更多数据",
+							icon: "none"
+						})
+					}
+					this.tabBars[this.tabIndex].listData = [...this.tabBars[this.tabIndex].listData, ...res.data.list]
+					this.tabBars[this.tabIndex].currentPageNum = this.tabBars[this.tabIndex].currentPageNum + 1
+					this.listData = this.tabBars[this.tabIndex].listData
+				})
 			}
 		}
 	}
