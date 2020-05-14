@@ -72,8 +72,9 @@
 						title: "审核糗事"
 					}
 				],
-				isLogin: true,
-				providerList: []
+				isLogin: false,
+				providerList: [],
+				userInfo: {}
 			}
 		},
 		methods: {
@@ -101,7 +102,7 @@
 							return {
 								name: providerName,
 								id: value,
-								loginIcon:icon
+								loginIcon: icon
 							}
 						});
 						// console.log(JSON.stringify(this.providerList))
@@ -119,6 +120,27 @@
 		},
 		onLoad() {
 			this.getLoginChannel()
+		},
+		onShow() {
+			// console.log("onShow")
+			uni.getStorage({
+				key: "userinfo",
+				success(res) {
+					// console.log(res)
+					// this.userInfo = res.data
+				},
+				complete: (res) => {
+					console.log(res.data)
+					if (res.data == null || res.data == '') {
+						console.log("unlogin")
+						this.isLogin = false
+					} else {
+						console.log("login")
+						this.isLogin = true
+						this.userInfo = JSON.parse(res.data)
+					}
+				}
+			})
 		}
 	}
 </script>

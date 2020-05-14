@@ -1,19 +1,50 @@
 <template>
 	<view>
-		<block v-for="(item,index) in listData" :key="index">
-			<s-index-list :itemData="item"></s-index-list>
-		</block>
+		<template v-if="type=='qiushi'">
+			<block v-for="(item,index) in listData" :key="index">
+				<s-index-list :itemData="item"></s-index-list>
+			</block>
+		</template>
+		<template v-if="type=='topic'">
+			<block v-for="(item,index) in listData" :key="index">
+				<s-news-recent-update-item :recentItem="item"></s-news-recent-update-item>
+			</block>
+		</template>
 	</view>
 </template>
 
 <script>
 	import sIndexList from "../../../component/index/s-index-list.vue"
+	import sNewsRecentUpdateItem from "../../../component/news/s-news-recent-update-item.vue"
 	export default {
 		components: {
-			sIndexList
+			sIndexList,
+			sNewsRecentUpdateItem
+		},
+		onLoad(options) {
+			this.type = options.type
+			if (options.type == 'qiushi') {
+				this.typeUrl = "search/post"
+			} else if (options.type = 'topic') {
+				this.typeUrl = "search/topic"
+			}
+			// #ifdef APP-PLUS
+			let currentWebView = this.$mp.page.$getAppWebview()
+			let titleView = currentWebView.getStyle().titleNView
+			if (options.type == 'qiushi') {
+				titleView.searchInput.placeholder = "搜索糗事"
+			} else if (options.type = 'topic') {
+				titleView.searchInput.placeholder = "搜索话题"
+			}
+			currentWebView.setStyle({
+				titleNView: titleView
+			})
+			// #endif
 		},
 		data() {
 			return {
+				type: "",
+				typeUrl: "",
 				requestParam: {
 					keyword: "",
 					page: 1
@@ -24,7 +55,7 @@
 		methods: {
 			getSearchList(searchText) {
 				this.request({
-					url: this.config.BASE_URL + "search/post",
+					url: this.config.BASE_URL + this.typeUrl,
 					method: "post",
 					data: this.requestParam
 				}).then(res => {

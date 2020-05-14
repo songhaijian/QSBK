@@ -101,16 +101,49 @@
 				if (this.codeTime > 0) {
 					return;
 				}
-				this.codeTime = 10
+				this.codeTime = 60
 				var timer = setInterval(() => {
 					this.codeTime--
 					if (this.codeTime < 1) {
 						clearInterval(timer)
 					}
 				}, 1000)
+				this.getMsgCode()
+			},
+			getMsgCode() {
+				this.request({
+					url: this.config.BASE_URL + "user/sendcode",
+					method: "post",
+					data: {
+						phone: this.phoneNum
+					}
+				}).then(res => {
+					this.authCode = res.msg.substr(4, res.msg.length - 1)
+					uni.showToast({
+						title: this.authCode,
+						icon: "none"
+					})
+				})
 			},
 			handleLogin() {
-				console.log("dsfsdf")
+				this.request({
+					url: this.config.BASE_URL + "user/phonelogin",
+					method: "post",
+					data: {
+						phone: this.phoneNum,
+						code: this.authCode
+					}
+				}).then(res => {
+					uni.setStorage({
+						key: "userinfo",
+						data: JSON.stringify(res.data),
+						success() {
+							uni.navigateBack({
+								delta: 1
+							})
+						}
+					})
+				})
 			},
 			isValidPhone() {
 				if (!(/^1[34578]\d{9}$/.test(this.phoneNum))) {

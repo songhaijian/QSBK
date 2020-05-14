@@ -99,7 +99,7 @@
 		},
 		onNavigationBarSearchInputClicked() {
 			uni.navigateTo({
-				url: "search-index/search-index"
+				url: "search-index/search-index?type=qiushi"
 			})
 		},
 		onNavigationBarButtonTap(e) {

@@ -20,4 +20,25 @@ https://ceshi2.dishait.cn/api/v1/topicclass
 8、获取动态页面最近更新列表接口
 https://ceshi2.dishait.cn/api/v1/hottopic
 9、根据话题分类ID获取话题分类列表接口
-https://ceshi2.dishait.cn/api/v1/topicclass/(话题分类ID)/topic/(页码)
+https://ceshi2.dishait.cn/api/v1/topic/(话题分类ID)/post/(页码)
+10、动态页面搜索话题接口
+https://ceshi2.dishait.cn/api/v1/search/topic
+post请求
+keyword:关键字
+11、短信验证码登录
+https://ceshi2.dishait.cn/api/v1/user/phonelogin
+{
+	"phone":"13450772009",
+	"code":6654
+}
+12、账号密码登录
+https://ceshi2.dishait.cn/api/v1/user/login
+{
+	"username":"13546021351",
+	"password":"13546021351"
+}
+12、发送短信验证码接口
+https://ceshi2.dishait.cn/api/v1/user/sendcode
+{
+	"phone":"18501212426"
+}

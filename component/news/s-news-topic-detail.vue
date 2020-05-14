@@ -1,21 +1,21 @@
 <template>
 	<view class="topic_detail_wrap">
 		<view class="top_bg_wrap">
-			<image :src="topicDetailObj.imagePath" mode="aspectFill"></image>
+			<image :src="topicDetailObj.titlepic" mode="aspectFill"></image>
 		</view>
 		<view class="info_wrap">
 			<view class="info_line1">
-				<image :src="topicDetailObj.imagePath" mode="widthFix"></image>
+				<image :src="topicDetailObj.titlepic" mode="widthFix"></image>
 				<view class="info_line1_title">
 					#{{topicDetailObj.title}}#
 				</view>
 			</view>
 			<view class="info_line2">
 				<view class="news_num_wrap">
-					动态{{topicDetailObj.newsNum}}
+					动态{{topicDetailObj.post_count}}
 				</view>
 				<view class="today_num_wrap">
-					今日{{topicDetailObj.todayNum}}
+					今日{{topicDetailObj.todaypost_count}}
 				</view>
 			</view>
 			<view class="info_line3">

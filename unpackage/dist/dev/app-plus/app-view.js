@@ -1762,10 +1762,16 @@ var render = function() {
                           _c("v-uni-input", {
                             staticClass: _vm._$g(12, "sc"),
                             attrs: {
-                              placeholder: "搜索内容",
+                              placeholder: "搜索话题",
+                              disabled: "true",
                               "placeholder-class":
                                 "iconfont icon-sousuo search_placeholder_wrap",
                               _i: 12
+                            },
+                            on: {
+                              click: function($event) {
+                                return _vm.$handleViewEvent($event)
+                              }
                             }
                           })
                         ],
@@ -2975,7 +2981,7 @@ var render = function() {
         { staticClass: _vm._$g(1, "sc"), attrs: { _i: 1 } },
         [
           _c("v-uni-image", {
-            attrs: { src: _vm._$g(2, "a-src"), mode: "widthFix", _i: 2 }
+            attrs: { src: _vm._$g(2, "a-src"), mode: "aspectFill", _i: 2 }
           })
         ],
         1
@@ -3055,7 +3061,7 @@ var render = function() {
                 ? _c("v-uni-image", {
                     attrs: {
                       src: _vm._$g(14, "a-src"),
-                      mode: "widthFix",
+                      mode: "aspectFill",
                       _i: 14
                     }
                   })
@@ -3222,7 +3228,7 @@ if(false) {}
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../Tools/HBuilderX.2.6.15.20200421.full/HBuilderX/plugins/uniapp-cli/node_modules/css-loader/dist/runtime/api.js */ 15);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "@charset \"UTF-8\";\r\n/**\r\n * 这里是uni-app内置的常用样式变量\r\n *\r\n * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量\r\n * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App\r\n *\r\n */\r\n/**\r\n * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能\r\n *\r\n * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件\r\n */\r\n/* 颜色变量 */\r\n/* 行为相关颜色 */\r\n/* 文字基本颜色 */\r\n/* 背景颜色 */\r\n/* 边框颜色 */\r\n/* 尺寸变量 */\r\n/* 文字尺寸 */\r\n/* 图片尺寸 */\r\n/* Border Radius */\r\n/* 水平间距 */\r\n/* 垂直间距 */\r\n/* 透明度 */\r\n/* 文章场景相关 */\n.commen_list[data-v-271f23dc] {\r\n  padding: 10rpx 20rpx;\r\n  display: -webkit-box;\r\n  display: -webkit-flex;\r\n  display: flex;\n}\n.commen_list .head_img_wrap[data-v-271f23dc] {\r\n  -webkit-flex-shrink: 0;\r\n          flex-shrink: 0;\n}\n.commen_list .head_img_wrap uni-image[data-v-271f23dc] {\r\n  width: 80rpx;\r\n  height: 80rpx;\r\n  border-radius: 50%;\n}\n.commen_list .item_right_wrap[data-v-271f23dc] {\r\n  margin-left: 10rpx;\r\n  border-bottom: 2rpx solid #eeeeee;\r\n  -webkit-box-flex: 1;\r\n  -webkit-flex: 1;\r\n          flex: 1;\n}\n.commen_list .item_right_wrap .item_line1[data-v-271f23dc] {\r\n  display: -webkit-box;\r\n  display: -webkit-flex;\r\n  display: flex;\r\n  -webkit-box-pack: justify;\r\n  -webkit-justify-content: space-between;\r\n          justify-content: space-between;\n}\n.commen_list .item_right_wrap .item_line1 .nickname_wrap[data-v-271f23dc] {\r\n  margin: 10rpx 0;\r\n  display: -webkit-box;\r\n  display: -webkit-flex;\r\n  display: flex;\r\n  -webkit-box-align: center;\r\n  -webkit-align-items: center;\r\n          align-items: center;\n}\n.commen_list .item_right_wrap .item_line1 .nickname_wrap .nickname[data-v-271f23dc] {\r\n  color: #999999;\n}\n.commen_list .item_right_wrap .item_line1 .nickname_wrap .sex_age_wrap[data-v-271f23dc] {\r\n  margin-left: 10rpx;\r\n  padding: 0 15rpx;\r\n  height: 40rpx;\r\n  display: -webkit-box;\r\n  display: -webkit-flex;\r\n  display: flex;\r\n  -webkit-box-align: center;\r\n  -webkit-align-items: center;\r\n          align-items: center;\r\n  background-color: #44b3ff;\r\n  border-radius: 20rpx;\r\n  color: #fff;\n}\n.commen_list .item_right_wrap .item_line1 .nickname_wrap .sex_age_wrap .icon-nan[data-v-271f23dc] {\r\n  font-size: 25rpx;\n}\n.commen_list .item_right_wrap .item_line1 .nickname_wrap .sex_age_wrap .icon-nv[data-v-271f23dc] {\r\n  font-size: 25rpx;\n}\n.commen_list .item_right_wrap .item_line1 .attention_wrap[data-v-271f23dc] {\r\n  display: -webkit-box;\r\n  display: -webkit-flex;\r\n  display: flex;\r\n  -webkit-box-align: center;\r\n  -webkit-align-items: center;\r\n          align-items: center;\n}\n.commen_list .item_right_wrap .item_line1 .attention_wrap .attention[data-v-271f23dc] {\r\n  background-color: #f4f4f4;\r\n  padding: 0 10rpx;\r\n  border-radius: 10rpx;\r\n  margin-right: 10rpx;\n}\n.commen_list .item_right_wrap .item_line1 .attention_wrap .icon-guanbi[data-v-271f23dc] {\r\n  color: #d5d5d5;\n}\n.commen_list .item_right_wrap .item_line2[data-v-271f23dc] {\r\n  font-size: 35rpx;\n}\n.commen_list .item_right_wrap .item_line3[data-v-271f23dc] {\r\n  display: -webkit-box;\r\n  display: -webkit-flex;\r\n  display: flex;\r\n  -webkit-box-pack: center;\r\n  -webkit-justify-content: center;\r\n          justify-content: center;\r\n  -webkit-box-align: center;\r\n  -webkit-align-items: center;\r\n          align-items: center;\r\n  position: relative;\r\n  color: #fff;\n}\n.commen_list .item_right_wrap .item_line3 uni-image[data-v-271f23dc] {\r\n  width: 100%;\r\n  border-radius: 10rpx;\n}\n.commen_list .item_right_wrap .item_line3 .icon-bofang[data-v-271f23dc] {\r\n  font-size: 120rpx;\r\n  position: absolute;\n}\n.commen_list .item_right_wrap .item_line3 .play_num_wrap[data-v-271f23dc] {\r\n  position: absolute;\r\n  right: 10rpx;\r\n  bottom: 10rpx;\r\n  padding: 5rpx 25rpx;\r\n  border-radius: 25rpx;\r\n  font-size: 20rpx;\r\n  background-color: rgba(0, 0, 0, 0.6);\n}\n.commen_list .item_right_wrap .item_line3_share[data-v-271f23dc] {\r\n  display: -webkit-box;\r\n  display: -webkit-flex;\r\n  display: flex;\r\n  -webkit-box-align: center;\r\n  -webkit-align-items: center;\r\n          align-items: center;\r\n  background-color: #f7f7f7;\r\n  padding: 20rpx 5rpx;\r\n  border-radius: 10rpx;\n}\n.commen_list .item_right_wrap .item_line3_share uni-image[data-v-271f23dc] {\r\n  width: 200rpx;\r\n  height: 100rpx;\r\n  border-radius: 10rpx;\n}\n.commen_list .item_right_wrap .item_line4[data-v-271f23dc] {\r\n  display: -webkit-box;\r\n  display: -webkit-flex;\r\n  display: flex;\r\n  -webkit-box-pack: justify;\r\n  -webkit-justify-content: space-between;\r\n          justify-content: space-between;\n}\n.commen_list .item_right_wrap .item_line4 .address_wrap[data-v-271f23dc] {\r\n  color: #bbbbbb;\n}\n.commen_list .item_right_wrap .item_line4 .share_and_commen_wrap[data-v-271f23dc] {\r\n  display: -webkit-box;\r\n  display: -webkit-flex;\r\n  display: flex;\r\n  color: #bbbbbb;\n}\n.commen_list .item_right_wrap .item_line4 .share_and_commen_wrap .icon-zhuanfa[data-v-271f23dc] {\r\n  font-size: 30rpx;\n}\n.commen_list .item_right_wrap .item_line4 .share_and_commen_wrap .icon-pinglun1[data-v-271f23dc] {\r\n  margin: 0 20rpx;\r\n  font-size: 30rpx;\n}\n.commen_list .item_right_wrap .item_line4 .share_and_commen_wrap .icon-dianzan[data-v-271f23dc] {\r\n  font-size: 30rpx;\n}\r\n", ""]);
+exports.push([module.i, "@charset \"UTF-8\";\r\n/**\r\n * 这里是uni-app内置的常用样式变量\r\n *\r\n * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量\r\n * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App\r\n *\r\n */\r\n/**\r\n * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能\r\n *\r\n * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件\r\n */\r\n/* 颜色变量 */\r\n/* 行为相关颜色 */\r\n/* 文字基本颜色 */\r\n/* 背景颜色 */\r\n/* 边框颜色 */\r\n/* 尺寸变量 */\r\n/* 文字尺寸 */\r\n/* 图片尺寸 */\r\n/* Border Radius */\r\n/* 水平间距 */\r\n/* 垂直间距 */\r\n/* 透明度 */\r\n/* 文章场景相关 */\n.commen_list[data-v-271f23dc] {\r\n  padding: 10rpx 20rpx;\r\n  display: -webkit-box;\r\n  display: -webkit-flex;\r\n  display: flex;\n}\n.commen_list .head_img_wrap[data-v-271f23dc] {\r\n  -webkit-flex-shrink: 0;\r\n          flex-shrink: 0;\n}\n.commen_list .head_img_wrap uni-image[data-v-271f23dc] {\r\n  width: 80rpx;\r\n  height: 80rpx;\r\n  border-radius: 50%;\n}\n.commen_list .item_right_wrap[data-v-271f23dc] {\r\n  margin-left: 10rpx;\r\n  border-bottom: 2rpx solid #eeeeee;\r\n  -webkit-box-flex: 1;\r\n  -webkit-flex: 1;\r\n          flex: 1;\n}\n.commen_list .item_right_wrap .item_line1[data-v-271f23dc] {\r\n  display: -webkit-box;\r\n  display: -webkit-flex;\r\n  display: flex;\r\n  -webkit-box-pack: justify;\r\n  -webkit-justify-content: space-between;\r\n          justify-content: space-between;\n}\n.commen_list .item_right_wrap .item_line1 .nickname_wrap[data-v-271f23dc] {\r\n  margin: 10rpx 0;\r\n  display: -webkit-box;\r\n  display: -webkit-flex;\r\n  display: flex;\r\n  -webkit-box-align: center;\r\n  -webkit-align-items: center;\r\n          align-items: center;\n}\n.commen_list .item_right_wrap .item_line1 .nickname_wrap .nickname[data-v-271f23dc] {\r\n  color: #999999;\n}\n.commen_list .item_right_wrap .item_line1 .nickname_wrap .sex_age_wrap[data-v-271f23dc] {\r\n  margin-left: 10rpx;\r\n  padding: 0 15rpx;\r\n  height: 40rpx;\r\n  display: -webkit-box;\r\n  display: -webkit-flex;\r\n  display: flex;\r\n  -webkit-box-align: center;\r\n  -webkit-align-items: center;\r\n          align-items: center;\r\n  background-color: #44b3ff;\r\n  border-radius: 20rpx;\r\n  color: #fff;\n}\n.commen_list .item_right_wrap .item_line1 .nickname_wrap .sex_age_wrap .icon-nan[data-v-271f23dc] {\r\n  font-size: 25rpx;\n}\n.commen_list .item_right_wrap .item_line1 .nickname_wrap .sex_age_wrap .icon-nv[data-v-271f23dc] {\r\n  font-size: 25rpx;\n}\n.commen_list .item_right_wrap .item_line1 .attention_wrap[data-v-271f23dc] {\r\n  display: -webkit-box;\r\n  display: -webkit-flex;\r\n  display: flex;\r\n  -webkit-box-align: center;\r\n  -webkit-align-items: center;\r\n          align-items: center;\n}\n.commen_list .item_right_wrap .item_line1 .attention_wrap .attention[data-v-271f23dc] {\r\n  background-color: #f4f4f4;\r\n  padding: 0 10rpx;\r\n  border-radius: 10rpx;\r\n  margin-right: 10rpx;\n}\n.commen_list .item_right_wrap .item_line1 .attention_wrap .icon-guanbi[data-v-271f23dc] {\r\n  color: #d5d5d5;\n}\n.commen_list .item_right_wrap .item_line2[data-v-271f23dc] {\r\n  font-size: 35rpx;\n}\n.commen_list .item_right_wrap .item_line3[data-v-271f23dc] {\r\n  display: -webkit-box;\r\n  display: -webkit-flex;\r\n  display: flex;\r\n  -webkit-box-pack: center;\r\n  -webkit-justify-content: center;\r\n          justify-content: center;\r\n  -webkit-box-align: center;\r\n  -webkit-align-items: center;\r\n          align-items: center;\r\n  position: relative;\r\n  color: #fff;\n}\n.commen_list .item_right_wrap .item_line3 uni-image[data-v-271f23dc] {\r\n  width: 100%;\r\n  height: 300rpx;\r\n  border-radius: 10rpx;\n}\n.commen_list .item_right_wrap .item_line3 .icon-bofang[data-v-271f23dc] {\r\n  font-size: 120rpx;\r\n  position: absolute;\n}\n.commen_list .item_right_wrap .item_line3 .play_num_wrap[data-v-271f23dc] {\r\n  position: absolute;\r\n  right: 10rpx;\r\n  bottom: 10rpx;\r\n  padding: 5rpx 25rpx;\r\n  border-radius: 25rpx;\r\n  font-size: 20rpx;\r\n  background-color: rgba(0, 0, 0, 0.6);\n}\n.commen_list .item_right_wrap .item_line3_share[data-v-271f23dc] {\r\n  display: -webkit-box;\r\n  display: -webkit-flex;\r\n  display: flex;\r\n  -webkit-box-align: center;\r\n  -webkit-align-items: center;\r\n          align-items: center;\r\n  background-color: #f7f7f7;\r\n  padding: 20rpx 5rpx;\r\n  border-radius: 10rpx;\n}\n.commen_list .item_right_wrap .item_line3_share uni-image[data-v-271f23dc] {\r\n  width: 200rpx;\r\n  height: 100rpx;\r\n  border-radius: 10rpx;\n}\n.commen_list .item_right_wrap .item_line4[data-v-271f23dc] {\r\n  display: -webkit-box;\r\n  display: -webkit-flex;\r\n  display: flex;\r\n  -webkit-box-pack: justify;\r\n  -webkit-justify-content: space-between;\r\n          justify-content: space-between;\n}\n.commen_list .item_right_wrap .item_line4 .address_wrap[data-v-271f23dc] {\r\n  color: #bbbbbb;\n}\n.commen_list .item_right_wrap .item_line4 .share_and_commen_wrap[data-v-271f23dc] {\r\n  display: -webkit-box;\r\n  display: -webkit-flex;\r\n  display: flex;\r\n  color: #bbbbbb;\n}\n.commen_list .item_right_wrap .item_line4 .share_and_commen_wrap .icon-zhuanfa[data-v-271f23dc] {\r\n  font-size: 30rpx;\n}\n.commen_list .item_right_wrap .item_line4 .share_and_commen_wrap .icon-pinglun1[data-v-271f23dc] {\r\n  margin: 0 20rpx;\r\n  font-size: 30rpx;\n}\n.commen_list .item_right_wrap .item_line4 .share_and_commen_wrap .icon-dianzan[data-v-271f23dc] {\r\n  font-size: 30rpx;\n}\r\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -5781,11 +5787,30 @@ var render = function() {
     "v-uni-view",
     { attrs: { _i: 0 } },
     [
-      _vm._l(_vm._$g(1, "f"), function(item, index, $20, $30) {
-        return [
-          _c("s-index-list", { key: item["k0"], attrs: { _i: "2-" + $30 } })
-        ]
-      })
+      _vm._$g(1, "i")
+        ? [
+            _vm._l(_vm._$g(2, "f"), function(item, index, $20, $30) {
+              return [
+                _c("s-index-list", {
+                  key: item["k0"],
+                  attrs: { _i: "3-" + $30 }
+                })
+              ]
+            })
+          ]
+        : _vm._e(),
+      _vm._$g(4, "i")
+        ? [
+            _vm._l(_vm._$g(5, "f"), function(item, index, $21, $31) {
+              return [
+                _c("s-news-recent-update-item", {
+                  key: item["k0"],
+                  attrs: { _i: "6-" + $31 }
+                })
+              ]
+            })
+          ]
+        : _vm._e()
     ],
     2
   )
@@ -5821,7 +5846,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
-var _sIndexList = _interopRequireDefault(__webpack_require__(/*! ../../../component/index/s-index-list.vue */ 7));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var _default =
+var _sIndexList = _interopRequireDefault(__webpack_require__(/*! ../../../component/index/s-index-list.vue */ 7));
+var _sNewsRecentUpdateItem = _interopRequireDefault(__webpack_require__(/*! ../../../component/news/s-news-recent-update-item.vue */ 88));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var _default =
 {
 
   data: function data() {
@@ -5830,7 +5856,8 @@ var _sIndexList = _interopRequireDefault(__webpack_require__(/*! ../../../compon
 
   },
   components: {
-    'sIndexList': _sIndexList.default } };exports.default = _default;
+    'sIndexList': _sIndexList.default,
+    'sNewsRecentUpdateItem': _sNewsRecentUpdateItem.default } };exports.default = _default;
 
 /***/ }),
 /* 176 */

@@ -17,7 +17,7 @@
 					<view class="topic_wrap">
 						<!-- 搜索框 -->
 						<view class="search_wrap">
-							<input class="uni-input" placeholder="搜索内容" placeholder-class="iconfont icon-sousuo search_placeholder_wrap" />
+							<input class="uni-input" placeholder="搜索话题" disabled="true" @click="handleClickSearch" placeholder-class="iconfont icon-sousuo search_placeholder_wrap" />
 						</view>
 						<!-- 轮播图 -->
 						<swiper class="swiper_wrap" :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000" :circular="true"
@@ -84,81 +84,7 @@
 					id: "huati"
 				}],
 				navIndex: 1,
-				newsList: {
-					"loadText": "上拉加载更多...",
-					"list": [
-						// 文字
-						{
-							userPic: "../../static/userpic/10.jpg",
-							userName: "三鱼先生",
-							sex: 0, //0:男 1：女
-							age: 25,
-							isAttention: false,
-							title: "六道快手家常菜,好吃又下饭,家人都喜欢",
-							titlePic: "",
-							video: false,
-							share: false,
-							path: "深圳 龙岗",
-							shareNum: 36,
-							commentNum: 27,
-							favNum: 9829
-						},
-						// 图文
-						{
-							userPic: "../../static/userpic/10.jpg",
-							userName: "三鱼先生",
-							sex: 1, //0:男 1：女
-							age: 25,
-							isAttention: false,
-							title: "六道快手家常菜,好吃又下饭,家人都喜欢",
-							titlePic: "../../static/datapic/1.jpg",
-							video: false,
-							share: false,
-							path: "深圳 龙岗",
-							shareNum: 36,
-							commentNum: 27,
-							favNum: 9829
-						},
-						// 视频
-						{
-							userPic: "../../static/userpic/10.jpg",
-							userName: "三鱼先生",
-							sex: 0, //0:男 1：女
-							age: 25,
-							isAttention: false,
-							title: "六道快手家常菜,好吃又下饭,家人都喜欢",
-							titlePic: "../../static/datapic/1.jpg",
-							video: {
-								playNum: "20W次播放",
-								videoTime: "2:47"
-							},
-							share: false,
-							path: "深圳 龙岗",
-							shareNum: 36,
-							commentNum: 27,
-							favNum: 9829
-						},
-						// 分享
-						{
-							userPic: "../../static/userpic/10.jpg",
-							userName: "三鱼先生",
-							sex: 0, //0:男 1：女
-							age: 25,
-							isAttention: false,
-							title: "六道快手家常菜,好吃又下饭,家人都喜欢",
-							titlePic: "",
-							video: false,
-							share: {
-								shareTitle: "从男人角度告诉你,为什么他对你有好感却不追呢",
-								shareImg: "../../static/datapic/1.jpg"
-							},
-							path: "深圳 龙岗",
-							shareNum: 36,
-							commentNum: 27,
-							favNum: 9829
-						}
-					]
-				},
+				newsList: {},
 				activeColor: "#fff",
 				defaultColor: "#000",
 				swiperList: [],
@@ -177,13 +103,7 @@
 			},
 			//滑动到底部
 			handleReachBottom() {
-				if ("上拉加载更多..." == this.newsList.loadText) {
-					this.newsList.loadText = "加载中..."
-					setTimeout(() => {
-						this.newsList.list = [...this.newsList.list, ...this.newsList.list]
-						this.newsList.loadText = "上拉加载更多..."
-					}, 1000)
-				}
+
 			},
 			//获取轮播图列表数据
 			getSwiperList() {
@@ -207,6 +127,12 @@
 					url: this.config.BASE_URL + "hottopic"
 				}).then(res => {
 					this.recentUpdateList = res.data.list
+				})
+			},
+			//搜索话题
+			handleClickSearch() {
+				uni.navigateTo({
+					url: "/pages/index/search-index/search-index?type=topic"
 				})
 			}
 		}

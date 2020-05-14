@@ -1,19 +1,19 @@
 <template>
 	<view class="commen_list animated fadeInDown fast">
 		<view class="head_img_wrap">
-			<image :src="item.userPic" mode="widthFix"></image>
+			<image :src="getHeadImg" mode="aspectFill"></image>
 		</view>
 		<view class="item_right_wrap">
 			<view class="item_line1">
 				<view class="nickname_wrap">
 					<view class="nickname">
-						{{item.userName}}
+						{{item.user.username}}
 					</view>
 					<view class="sex_age_wrap">
-						<view class="iconfont" :class="[item.sex==0?'icon-nan':'icon-nv']">
+						<view class="iconfont" :class="[item.user.userinfo.sex==0?'icon-nan':'icon-nv']">
 
 						</view>
-						{{item.age}}
+						{{item.user.userinfo.age}}
 					</view>
 
 				</view>
@@ -30,7 +30,7 @@
 				{{item.title}}
 			</view>
 			<view class="item_line3">
-				<image v-if="item.titlePic" :src="item.titlePic" mode="widthFix"></image>
+				<image v-if="item.titlepic" :src="item.titlepic" mode="aspectFill"></image>
 				<template v-if="item.video">
 					<view class="iconfont icon-bofang">
 
@@ -53,13 +53,13 @@
 				</view>
 				<view class="share_and_commen_wrap">
 					<view class="iconfont icon-zhuanfa">
-						{{item.shareNum}}
+						{{item.sharenum}}
 					</view>
 					<view class="iconfont icon-pinglun1">
-						{{item.commentNum}}
+						{{item.comment_count}}
 					</view>
 					<view class="iconfont icon-dianzan">
-						{{item.favNum}}
+						{{item.ding_count}}
 					</view>
 				</view>
 			</view>
@@ -85,6 +85,15 @@
 				})
 			}
 		},
+		computed:{
+			getHeadImg() {
+				if (this.item.user.userpic == null) {
+					return "/static/userpic/12.jpg"
+				} else {
+					return this.item.user.userpic
+				}
+			}
+		}
 	}
 </script>
 
@@ -170,6 +179,7 @@
 
 				image {
 					width: 100%;
+					height: 300rpx;
 					border-radius: 10rpx;
 				}
 

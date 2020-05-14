@@ -27,16 +27,14 @@
 			sNewsCommonList,
 			sLoadMore
 		},
+		onLoad(options) {
+			this.topicDetailObj = JSON.parse(options.topicItem)
+			this.getListData()
+		},
 		data() {
 			return {
-				topicDetailObj: {
-					imagePath: "/static/topicpic/3.jpeg",
-					title: "天天大卡",
-					desc: "面试官:在电梯里巧遇马云你会做什么?90后女孩的回答当场被录用",
-					newsNum: 507,
-					todayNum: 707
-				},
-				tabIndex: 1,
+				topicDetailObj: {},
+				tabIndex: 0,
 				tabBars: [{
 					name: '默认',
 					id: 'moren'
@@ -46,153 +44,13 @@
 				}],
 				itemStyle: "width:50%;",
 				topicDetailList: [{
-					loadText: "上拉加载更多...",
-					list: [
-						// 文字
-						{
-							userPic: "/static/userpic/10.jpg",
-							userName: "三鱼先生",
-							sex: 0, //0:男 1：女
-							age: 25,
-							isAttention: false,
-							title: "六道快手家常菜,好吃又下饭,家人都喜欢",
-							titlePic: "",
-							video: false,
-							share: false,
-							path: "深圳 龙岗",
-							shareNum: 36,
-							commentNum: 27,
-							favNum: 9829
-						},
-						// 图文
-						{
-							userPic: "/static/userpic/10.jpg",
-							userName: "三鱼先生",
-							sex: 1, //0:男 1：女
-							age: 25,
-							isAttention: false,
-							title: "六道快手家常菜,好吃又下饭,家人都喜欢",
-							titlePic: "/static/datapic/1.jpg",
-							video: false,
-							share: false,
-							path: "深圳 龙岗",
-							shareNum: 36,
-							commentNum: 27,
-							favNum: 9829
-						},
-						// 视频
-						{
-							userPic: "/static/userpic/10.jpg",
-							userName: "三鱼先生",
-							sex: 0, //0:男 1：女
-							age: 25,
-							isAttention: false,
-							title: "六道快手家常菜,好吃又下饭,家人都喜欢",
-							titlePic: "/static/datapic/1.jpg",
-							video: {
-								playNum: "20W次播放",
-								videoTime: "2:47"
-							},
-							share: false,
-							path: "深圳 龙岗",
-							shareNum: 36,
-							commentNum: 27,
-							favNum: 9829
-						},
-						// 分享
-						{
-							userPic: "/static/userpic/10.jpg",
-							userName: "三鱼先生",
-							sex: 0, //0:男 1：女
-							age: 25,
-							isAttention: false,
-							title: "六道快手家常菜,好吃又下饭,家人都喜欢",
-							titlePic: "",
-							video: false,
-							share: {
-								shareTitle: "从男人监督告诉你,为什么他对你有好感却不追呢",
-								shareImg: "/static/datapic/1.jpg"
-							},
-							path: "深圳 龙岗",
-							shareNum: 36,
-							commentNum: 27,
-							favNum: 9829
-						}
-					]
+					loadText: "",
+					currentPageNum: 1,
+					list: []
 				}, {
-					loadText: "上拉加载更多...",
-					list: [
-						// 文字
-						{
-							userPic: "/static/userpic/10.jpg",
-							userName: "三鱼先生",
-							sex: 0, //0:男 1：女
-							age: 25,
-							isAttention: false,
-							title: "六道快手家常菜,好吃又下饭,家人都喜欢",
-							titlePic: "",
-							video: false,
-							share: false,
-							path: "深圳 龙岗",
-							shareNum: 36,
-							commentNum: 27,
-							favNum: 9829
-						},
-						// 图文
-						{
-							userPic: "/static/userpic/10.jpg",
-							userName: "三鱼先生",
-							sex: 1, //0:男 1：女
-							age: 25,
-							isAttention: false,
-							title: "六道快手家常菜,好吃又下饭,家人都喜欢",
-							titlePic: "/static/datapic/1.jpg",
-							video: false,
-							share: false,
-							path: "深圳 龙岗",
-							shareNum: 36,
-							commentNum: 27,
-							favNum: 9829
-						},
-						// 视频
-						{
-							userPic: "/static/userpic/10.jpg",
-							userName: "三鱼先生",
-							sex: 0, //0:男 1：女
-							age: 25,
-							isAttention: false,
-							title: "六道快手家常菜,好吃又下饭,家人都喜欢",
-							titlePic: "/static/datapic/1.jpg",
-							video: {
-								playNum: "20W次播放",
-								videoTime: "2:47"
-							},
-							share: false,
-							path: "深圳 龙岗",
-							shareNum: 36,
-							commentNum: 27,
-							favNum: 9829
-						},
-						// 分享
-						{
-							userPic: "/static/userpic/10.jpg",
-							userName: "三鱼先生",
-							sex: 0, //0:男 1：女
-							age: 25,
-							isAttention: false,
-							title: "六道快手家常菜,好吃又下饭,家人都喜欢",
-							titlePic: "",
-							video: false,
-							share: {
-								shareTitle: "从男人角度告诉你,为什么他对你有好感却不追呢",
-								shareImg: "/static/datapic/1.jpg"
-							},
-							path: "深圳 龙岗",
-							shareNum: 36,
-							commentNum: 27,
-							favNum: 9829
-						}
-					]
+					loadText: "",
+					currentPageNum: 1,
+					list: []
 				}]
 			}
 		},
@@ -200,20 +58,37 @@
 			//TabBar点击事件
 			handleItemClick(index) {
 				this.tabIndex = index
+				if (this.topicDetailList[this.tabIndex].list.length <= 0) {
+					this.getListData()
+				}
+			},
+			//获取列表数据
+			getListData() {
+				this.topicDetailList[this.tabIndex].loadText = "加载中..."
+				this.request({
+					url: this.config.BASE_URL + "/topic/" + this.topicDetailObj.id + "/post/" + this.topicDetailList[this.tabIndex]
+						.currentPageNum
+				}).then(res => {
+					if (res.data.list.length <= 0) {
+						return uni.showToast({
+							title: "暂无更多数据"
+						})
+					}
+					this.topicDetailList[this.tabIndex].list = [...this.topicDetailList[this.tabIndex].list, ...res.data.list]
+					this.topicDetailList[this.tabIndex].currentPageNum = this.topicDetailList[this.tabIndex].currentPageNum + 1
+					this.topicDetailList[this.tabIndex].loadText = "上拉加载更多..."
+				})
 			}
 		},
 		onReachBottom() {
-			this.topicDetailList[this.tabIndex].loadText = "加载中..."
-			this.topicDetailList[this.tabIndex].list = [...this.topicDetailList[this.tabIndex].list, ...this.topicDetailList[
-					this.tabIndex]
-				.list
-			]
-			this.topicDetailList[this.tabIndex].loadText = "上拉加载更多..."
+			this.getListData()
 		},
 		onPullDownRefresh() {
-			setTimeout(() => {
-				uni.stopPullDownRefresh()
-			}, 2000);
+			this.topicDetailList[this.tabIndex].list = []
+			this.topicDetailList[this.tabIndex].currentPageNum = 1
+			this.topicDetailList[this.tabIndex].loadText = ""
+			this.getListData()
+			uni.stopPullDownRefresh()
 		}
 	}
 </script>
