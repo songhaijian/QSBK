@@ -4,7 +4,7 @@
 			<s-mine-list-item :listItem="seetingItem"></s-mine-list-item>
 		</block>
 
-		<button type="default">退出登录</button>
+		<button type="default" @click="handleLogout">退出登录</button>
 	</view>
 </template>
 
@@ -67,7 +67,16 @@
 			}
 		},
 		methods: {
-
+			handleLogout() {
+				uni.clearStorage()
+				uni.showToast({
+					title: "清除成功",
+					icon: "none"
+				})
+				uni.navigateBack({
+					delta:1
+				})
+			}
 		}
 	}
 </script>

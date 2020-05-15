@@ -40,6 +40,9 @@
 										title: "清除成功",
 										icon: "none"
 									})
+									uni.navigateBack({
+										delta:1
+									})
 								}
 							}
 						})

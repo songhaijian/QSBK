@@ -37,8 +37,37 @@ https://ceshi2.dishait.cn/api/v1/user/login
 	"username":"13546021351",
 	"password":"13546021351"
 }
-12、发送短信验证码接口
+13、发送短信验证码接口
 https://ceshi2.dishait.cn/api/v1/user/sendcode
 {
 	"phone":"18501212426"
+}
+14、设置/修改密码接口
+https://ceshi2.dishait.cn/api/v1/repassword
+需要传token
+{
+	"oldpassword":"1111",
+	"newpassword":"123456",
+	"renewpassword":"123456"
+}
+15、绑定邮箱接口
+https://ceshi2.dishait.cn/api/v1/user/bindemail
+需要传token
+{
+	"email":"425198567@qq.com"
+}
+16、上传头像接口
+https://ceshi2.dishait.cn/api/v1/edituserpic
+需要传token
+17、修改资料接口
+https://ceshi2.dishait.cn/api/v1/edituserinfo
+需要传token
+{
+	"name":"shj",
+	"sex":"1",
+	"qg":"1",
+	"job":"IT",
+	"birthday":"2020-05-15",
+	"path":"广州",
+	"age":"10"
 }

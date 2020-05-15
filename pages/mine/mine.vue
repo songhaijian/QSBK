@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<s-mine-unlogin v-if="!isLogin"></s-mine-unlogin>
-		<s-mine-login v-if="isLogin"></s-mine-login>
+		<s-mine-login v-if="isLogin" :userInfo="userInfo"></s-mine-login>
 		<view class="sort_wrap">
 			<block v-for="(sortItem,sortIndex) in sortList" :key="sortIndex">
 				<s-mine-sort-item :sortItem="sortItem"></s-mine-sort-item>
@@ -114,30 +114,29 @@
 			}
 		},
 		onNavigationBarButtonTap(e) {
-			uni.navigateTo({
-				url: "./mine-seeting/mine-seeting"
-			})
+			if (this.isLogin) {
+				uni.navigateTo({
+					url: "./mine-seeting/mine-seeting"
+				})
+			} else {
+				uni.navigateTo({
+					url: "mine-login/mine-login"
+				})
+			}
 		},
 		onLoad() {
 			this.getLoginChannel()
 		},
 		onShow() {
-			// console.log("onShow")
 			uni.getStorage({
 				key: "userinfo",
-				success(res) {
-					// console.log(res)
-					// this.userInfo = res.data
-				},
 				complete: (res) => {
-					console.log(res.data)
 					if (res.data == null || res.data == '') {
-						console.log("unlogin")
 						this.isLogin = false
 					} else {
-						console.log("login")
 						this.isLogin = true
 						this.userInfo = JSON.parse(res.data)
+						console.log(this.userInfo)
 					}
 				}
 			})

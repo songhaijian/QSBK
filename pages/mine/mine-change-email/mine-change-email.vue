@@ -1,7 +1,6 @@
 <template>
 	<view class="change_pwd_wrap">
 		<input type="text" placeholder="输入你要绑定的邮箱" class="uni-input" v-model="email" />
-		<input type="text" placeholder="请输入密码" class="uni-input" v-model="pwd" password="true" />
 		<button type="default" class="btn_enable" :class="{btn_disable:btnIsDisable}" :disabled="btnIsDisable" @click="handleConfirm"
 		 :loading="loading">完成</button>
 	</view>
@@ -11,21 +10,15 @@
 	export default {
 		data() {
 			return {
+				hasBindEmail: false,
+				token: "",
 				btnIsDisable: true,
 				email: "",
-				pwd: "",
 				loading: false
 			}
 		},
 		watch: {
 			email(val) {
-				if (this.inputIsEmpty()) {
-					this.btnIsDisable = true
-				} else {
-					this.btnIsDisable = false
-				}
-			},
-			pwd(val) {
 				if (this.inputIsEmpty()) {
 					this.btnIsDisable = true
 				} else {
@@ -45,18 +38,58 @@
 				if (!this.inputIsEmpty()) {
 					this.loading = true
 					this.btnIsDisable = true
-					uni.showToast({
-						title: "修改成功"
+					this.request({
+						url: this.config.BASE_URL + "user/bindemail",
+						method:"post",
+						data: {
+							email: this.email
+						},
+						header: {
+							token:this.token
+						}
+					}).then(res=>{
+						console.log(res)
+						uni.showToast({
+							title: res.msg,
+							success() {
+								if (res.errorCode || res.errorCode != null) {
+						
+								} else {
+									uni.navigateBack({
+										delta: 1
+									})
+								}
+							}
+						})
 					})
+					
 				}
 			},
 			inputIsEmpty() {
 
-				if (this.email && this.email != null && this.pwd && this.pwd != null) {
+				if (this.email && this.email != null) {
 					return false;
 				}
 				return true;
 			}
+		},
+		onLoad() {
+			uni.getStorage({
+				key: "userinfo",
+				complete: (res) => {
+					if (res.data == null || res.data == '') {
+						this.hasBindEmail = false
+					} else {
+						let userInfo = JSON.parse(res.data)
+						this.token = userInfo.token
+						if (userInfo.email) {
+							this.hasBindEmail = true
+						} else {
+							this.hasBindEmail = false
+						}
+					}
+				}
+			})
 		}
 	}
 </script>

@@ -28,7 +28,7 @@
 		</view>
 		<button type="default" class="login_btn" :class="{btn_active:!btnDisable}" :disabled="!btnClick" @click="handleLogin">登录</button>
 		<view class="switch_login_wrap" @click="handleSwitchLoginType">
-			账号密码登录
+			{{loginHint}}
 			<view class="iconfont icon-jinru">
 
 			</view>
@@ -71,7 +71,8 @@
 				authCode: "",
 				accountNum: "",
 				pwdNum: "",
-				providerList: []
+				providerList: [],
+				loginHint: "账号密码登录"
 			}
 		},
 		onLoad() {
@@ -85,6 +86,11 @@
 			},
 			handleSwitchLoginType() {
 				this.accountLogin = !this.accountLogin
+				if (this.accountLogin) {
+					this.loginHint = "短信验证码登录"
+				} else {
+					this.loginHint = "账号密码登录"
+				}
 				this.phoneNum = ""
 				this.authCode = ""
 				this.accountNum = ""
@@ -126,12 +132,39 @@
 				})
 			},
 			handleLogin() {
+				if (this.accountLogin) {
+					this.handleAccountLogin()
+				} else {
+					this.handleAuthCodeLogin()
+				}
+			},
+			handleAuthCodeLogin() {
 				this.request({
 					url: this.config.BASE_URL + "user/phonelogin",
 					method: "post",
 					data: {
 						phone: this.phoneNum,
 						code: this.authCode
+					}
+				}).then(res => {
+					uni.setStorage({
+						key: "userinfo",
+						data: JSON.stringify(res.data),
+						success() {
+							uni.navigateBack({
+								delta: 1
+							})
+						}
+					})
+				})
+			},
+			handleAccountLogin() {
+				this.request({
+					url: this.config.BASE_URL + "user/login",
+					method: "post",
+					data: {
+						username: this.accountNum,
+						password: this.pwdNum
 					}
 				}).then(res => {
 					uni.setStorage({

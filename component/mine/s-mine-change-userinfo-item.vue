@@ -8,7 +8,7 @@
 			<view v-if="itemData.type=='text'">
 				{{itemData.text}}
 			</view>
-			<input v-if="itemData.type=='input'" type="text" v-model="nickName" />
+			<input v-if="itemData.type=='input'" type="text" v-model="itemData.text" />
 			<picker v-if="itemData.type=='birthday'" mode="date" :value="date" :start="startDate" :end="endDate" @change="bindDateChange">
 				<view>
 					{{itemData.text}}
@@ -29,7 +29,6 @@
 		},
 		data() {
 			return {
-				nickName: this.itemData.text,
 				date: this.itemData.text
 			}
 		},
@@ -62,11 +61,6 @@
 				month = month > 9 ? month : '0' + month;;
 				day = day > 9 ? day : '0' + day;
 				return `${year}-${month}-${day}`;
-			}
-		},
-		watch: {
-			nickName(value) {
-				this.itemData.text = value
 			}
 		}
 	}

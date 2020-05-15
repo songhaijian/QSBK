@@ -1,11 +1,11 @@
 <template>
 	<view class="login_wrap" @click="handleUserSpace">
 		<view class="head_img_wrap">
-			<image src="../../static/userpic/2.jpg" mode="widthFix"></image>
+			<image :src="getHeadImg" mode="aspectFill"></image>
 		</view>
 		<view class="login_middle_wrap">
 			<view class="login_nickname">
-				楚绵
+				{{userInfo.username}}
 			</view>
 			<view class="login_count_wrap">
 				<view class="all_count">
@@ -24,11 +24,23 @@
 
 <script>
 	export default {
+		props:{
+			userInfo:Object
+		},
 		methods:{
 			handleUserSpace(){
 				uni.navigateTo({
 					url:"/pages/mine/mine-user-space/mine-user-space"
 				})
+			}
+		},
+		computed:{
+			getHeadImg() {
+				if (this.userInfo.userpic == null) {
+					return "/static/userpic/12.jpg"
+				} else {
+					return this.userInfo.userpic
+				}
 			}
 		}
 	}
@@ -43,7 +55,7 @@
 		.head_img_wrap {
 			image {
 				width: 100rpx;
-				height: 100prx;
+				height: 100rpx;
 				border-radius: 50%;
 			}
 		}
