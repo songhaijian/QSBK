@@ -6,7 +6,7 @@
 				最新评论 {{commentList.length}}
 			</view>
 			<block v-for="(commentItem,commentIndex) in commentList" :key="commentIndex">
-				<s-index-detail-comment-item :commentItem="commentItem"></s-index-detail-comment-item>
+				<s-index-detail-comment-item :commentItem="commentItem" @handleClickUser="handleClickUser"></s-index-detail-comment-item>
 			</block>
 		</view>
 		<view class="bottom_chat_wrap">
@@ -51,7 +51,10 @@
 					}
 				],
 				showShareDialog: false,
-				providerList: []
+				providerList: [],
+				replyId: 0,
+				isLogin: false,
+				userInfo: {}
 			}
 		},
 		onLoad(options) {
@@ -59,22 +62,43 @@
 			uni.setNavigationBarTitle({
 				title: this.itemData.content
 			})
+			uni.getStorage({
+				key: "userinfo",
+				complete: (res) => {
+					if (res.data == null || res.data == '') {
+						this.isLogin = false
+					} else {
+						this.isLogin = true
+						this.userInfo = JSON.parse(res.data)
+					}
+				}
+			})
 			this.getCommentList()
 			this.getShareList()
 		},
 		methods: {
 			//发送评论
 			handleSendChat(value) {
-				let nowTime = new Date().getTime()
-				let sendCommentObj = {
-					id: 4,
-					pId: 0,
-					headImg: "/static/userpic/14.jpg",
-					userName: "飞屋睿",
-					commentContent: value,
-					newTime: timeUtils.gettime.gettime(nowTime)
-				}
-				this.commentData.commentList.push(sendCommentObj)
+				this.request({
+					url: this.config.BASE_URL + "post/comment",
+					data: {
+						fid: this.replyId,
+						data: value,
+						post_id: this.itemData.id
+					},
+					method: "post",
+					header: {
+						token: this.userInfo.token
+					}
+				}).then(res => {
+					uni.showToast({
+						title: res.msg,
+						success: () => {
+							this.commentList = []
+							this.getCommentList()
+						}
+					})
+				})
 			},
 			//分享弹窗
 			handleShowShareDialog() {
@@ -85,19 +109,18 @@
 				this.request({
 					url: this.config.BASE_URL + "post/" + this.itemData.id + "/comment"
 				}).then(res => {
-					let tempCommentList = res.data.list
-					while (this.commentList.length != tempCommentList.length) {
-						tempCommentList.forEach(v => {
-							if (v.fid == 0) {
-								this.commentList.push(v)
-								tempCommentList.forEach(childItem => {
-									if (v.id == childItem.fid) {
-										this.commentList.push(childItem)
-									}
-								})
+					let tempCommentList = []
+					res.data.list.forEach(v => {
+						if (v.fid == 0) {
+							this.commentList.push(v)
+						} else {
+							const hasIndex = this.commentList.findIndex(childItem => v.fid == childItem.id)
+							if (hasIndex >= 0) {
+								this.commentList.splice(hasIndex + 1, 0, v)
 							}
-						})
-					}
+
+						}
+					})
 				})
 			},
 			//获取分享列表
@@ -155,6 +178,9 @@
 						})
 					}
 				});
+			},
+			handleClickUser(e) {
+				this.replyId = e
 			}
 		},
 		onNavigationBarButtonTap: function(res) {

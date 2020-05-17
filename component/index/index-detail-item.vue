@@ -17,7 +17,7 @@
 					</view>
 
 				</view>
-				<view v-if="!isAttention" class="attention_wrap" @click="handleAddAttention">
+				<view v-if="!item.hasAttention" class="attention_wrap" @click="handleAddAttention">
 					<view class="attention">
 						+&nbsp;关注
 					</view>
@@ -81,12 +81,15 @@
 		},
 		data() {
 			return {
-				isAttention: this.item.isAttention
 			}
 		},
 		methods: {
 			handleAddAttention() {
-				this.isAttention = true
+				uni.$emit('handleAddAttention',{
+					type:"addAttention",
+					userId:this.item.user_id
+				})
+				this.$emit('handleAddAttention')
 				uni.showToast({
 					title: "关注成功"
 				})

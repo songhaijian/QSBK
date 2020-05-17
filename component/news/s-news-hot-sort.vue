@@ -23,13 +23,13 @@
 
 <script>
 	export default {
-		props:{
-			hotSortTypeList:Array
+		props: {
+			hotSortTypeList: Array
 		},
-		methods:{
-			handleMore(){
+		methods: {
+			handleMore() {
 				uni.navigateTo({
-					url:"/pages/news/topic-sort/topic-sort"
+					url: "/pages/news/topic-sort/topic-sort"
 				})
 			}
 		}

@@ -25,13 +25,21 @@
 <script>
 	export default {
 		props: {
-			recentItem: Object
+			recentItem: Object,
+			clickType: ""
 		},
 		methods: {
 			haneleItemClick() {
-				uni.navigateTo({
-					url: "/pages/news/hot-sort-detail/hot-sort-detail?topicItem=" + JSON.stringify(this.recentItem)
-				})
+				if (this.clickType == "publish") {
+					uni.$emit("backPublish", this.recentItem)
+					uni.navigateBack({
+						delta: 1
+					})
+				} else {
+					uni.navigateTo({
+						url: "/pages/news/hot-sort-detail/hot-sort-detail?topicItem=" + JSON.stringify(this.recentItem)
+					})
+				}
 			}
 		}
 	}

@@ -71,3 +71,34 @@ https://ceshi2.dishait.cn/api/v1/edituserinfo
 	"path":"广州",
 	"age":"10"
 }
+18、获取意见反馈记录接口(get)
+https://ceshi2.dishait.cn/api/v1/feedbacklist/(页码)
+需要传token
+19、添加关注接口(post)
+https://ceshi2.dishait.cn/api/v1/follow
+需要传token
+{
+	"follow_id":12
+}
+20、上传图片
+https://ceshi2.dishait.cn/api/v1/image/uploadmore
+21、发布文章接口
+https://ceshi2.dishait.cn/api/v1/post/create
+{
+	"imagelist":[
+		{
+			"id":"19"
+		}
+	],
+	"text":"1212212",
+	"isopen":1,
+	"topic_id":1,
+	"post_class_id":1
+}
+22、评论接口
+https://ceshi2.dishait.cn/api/v1/post/comment
+{
+	"fid":"5",//评论id
+	"data":"231234",//评论内容
+	"post_id":"614"//文章id
+}

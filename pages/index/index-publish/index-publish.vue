@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view class="publish_wrap">
 		<!-- 自定义导航栏 -->
 		<uni-nav-bar left-icon="arrowleft" :statusBar="true" rightText="发布" @clickLeft="handleBack" @clickRight="handlePublish">
 			<view class="nav_title_wrap" @click="handleTitleTypeClick">
@@ -15,6 +15,16 @@
 		</view>
 		<!-- 上传图片 -->
 		<upload-img @selectImg="handleSelectImg"></upload-img>
+		<view class="bottom_wrap">
+			<picker @change="bindPickerChange" :value="sortIndex" :range="sortArray" class="select_sort_wrap">
+				<view>
+					{{hintSortText}}
+				</view>
+			</picker>
+			<view class="select_topic_wrap" @click="handleSelectTopic">
+				{{hintTopicText}}
+			</view>
+		</view>
 		<!-- 弹窗 -->
 		<uni-popup ref="showpopup">
 			<view class="pop_wrap">
@@ -55,16 +65,44 @@
 			uniPopup
 		},
 		onLoad() {
+			uni.$on("backPublish", (e) => {
+				console.log(e)
+				this.topic_id = e.id
+				this.hintTopicText = e.title
+			})
 			this.$nextTick(() => {
 				this.$refs['showpopup'].open()
 			})
+			uni.getStorage({
+				key: "userinfo",
+				complete: (res) => {
+					if (res.data == null || res.data == '') {
+						this.isLogin = false
+					} else {
+						this.isLogin = true
+						this.userInfo = JSON.parse(res.data)
+					}
+				}
+			})
+			this.getTabList()
 		},
 		data() {
 			return {
 				titleText: "所有人可见",
 				showSaveDialog: true,
 				editText: "",
-				imgList: []
+				imgList: [],
+				isLogin: false,
+				userInfo: {},
+				imgListId: [],
+				sortList: [],
+				sortArray: [],
+				sortIndex: 0,
+				hintSortText: "选择分类",
+				hintTopicText: "选择话题",
+				post_class_id: -1,
+				topic_id: -1,
+				isopen: 0
 			}
 		},
 		methods: {
@@ -79,18 +117,86 @@
 				uni.showActionSheet({
 					itemList: itemArray,
 					success: (res) => {
-						this.titleText = itemArray[res.tapIndex]
+						this.titleText = itemArray[res.tapIndex],
+							this.isopen = res.tapIndex
 					}
 				});
 			},
 			//发布按钮
 			handlePublish() {
-				console.log("发布按钮")
+				if (this.editText == null || this.editText == '') {
+					return uni.showToast({
+						title: "请输入内容",
+						icon: "none"
+					})
+				}
+				if (this.imgListId.length <= 0) {
+					return uni.showToast({
+						title: "请上传图片",
+						icon: "none"
+					})
+				}
+				if (this.post_class_id <= 0) {
+					return uni.showToast({
+						title: "请选择分类",
+						icon: "none"
+					})
+				}
+				if (this.topic_id <= 0) {
+					return uni.showToast({
+						title: "请选择话题",
+						icon: "none"
+					})
+				}
+				this.publish()
 			},
 			//选择图片
 			handleSelectImg(imgList) {
 				this.imgList = imgList
-				console.log(imgList)
+				this.uploadImg()
+			},
+			//上传图片
+			async uploadImg() {
+				for (var i = 0; i < this.imgList.length; i++) {
+					uni.showLoading({
+						title: "上传中..."
+					})
+					var upRes = await uni.uploadFile({
+						url: this.config.BASE_URL + "image/uploadmore",
+						filePath: this.imgList[i],
+						name: "imglist[]",
+						header: {
+							token: this.userInfo.token
+						}
+					})
+					uni.hideLoading()
+					const imgIdObj = {
+						id: JSON.parse(upRes[1].data).data.list[0].id
+					}
+					this.imgListId.push(imgIdObj)
+				}
+				uni.showToast({
+					title: "上传成功"
+				})
+			},
+			publish() {
+				console.log(this.imgListId)
+				this.request({
+					url: this.config.BASE_URL + "post/create",
+					method: "post",
+					data: {
+						imagelist: this.imgListId,
+						text: this.editText,
+						isopen: this.isopen,
+						topic_id: this.topic_id,
+						post_class_id: this.post_class_id
+					},
+					header: {
+						token: this.userInfo.token
+					}
+				}).then(res => {
+					console.log(res)
+				})
 			},
 			// 关闭弹窗
 			handleClosePop() {
@@ -115,6 +221,27 @@
 							delta: 1
 						})
 					}
+				})
+			},
+			//获取分类列表数据
+			getTabList() {
+				this.request({
+					url: this.config.BASE_URL + "postclass"
+				}).then(result => {
+					this.sortList = result.data.list
+					this.sortList.forEach(v => {
+						this.sortArray.push(v.classname)
+					})
+				})
+			},
+			bindPickerChange: function(e) {
+				this.sortIndex = e.target.value
+				this.hintSortText = this.sortArray[e.target.value]
+				this.post_class_id = this.sortList[this.sortIndex].id
+			},
+			handleSelectTopic() {
+				uni.navigateTo({
+					url: "/pages/news/topic-sort/topic-sort?type=publish"
 				})
 			}
 		},
@@ -160,6 +287,29 @@
 		button {
 			margin-top: 20rpx;
 			background-color: #ffe934;
+		}
+	}
+
+
+
+	.bottom_wrap {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		display: flex;
+		width: 100%;
+		border-top: 1rpx solid #eee;
+
+		.select_sort_wrap {
+			padding: 20rpx 0;
+			flex: 1;
+			text-align: center;
+		}
+
+		.select_topic_wrap {
+			padding: 20rpx 0;
+			flex: 1;
+			text-align: center;
 		}
 	}
 </style>

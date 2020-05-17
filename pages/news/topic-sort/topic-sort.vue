@@ -5,7 +5,7 @@
 			<swiper-item v-for="(pageItem,pageIndex) in tabBars" :key="pageIndex">
 				<scroll-view scroll-y="true" :style="{height:swiperHeight+'px'}" @scrolltolower="handleReachBottom" class="sc_wrap">
 					<block v-for="(recentItem,recentIndex) in listData" :key="recentIndex">
-						<s-news-recent-update-item :recentItem="recentItem"></s-news-recent-update-item>
+						<s-news-recent-update-item :recentItem="recentItem" :clickType="clickType"></s-news-recent-update-item>
 					</block>
 				</scroll-view>
 			</swiper-item>
@@ -27,10 +27,17 @@
 				scrollInto: "",
 				tabIndex: 0,
 				tabBars: [],
-				listData: []
+				listData: [],
+				clickType:""
 			}
 		},
-		onLoad() {
+		onLoad(options) {
+			this.clickType=options.type
+			if(this.clickType=="publish"){
+				uni.setNavigationBarTitle({
+					title:"选择话题分类"
+				})
+			}
 			uni.getSystemInfo({
 				success: (res) => {
 					let height = res.windowHeight - uni.upx2px(80)

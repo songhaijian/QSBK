@@ -5,8 +5,8 @@
 			<swiper-item v-for="(pageItem,pageIndex) in tabBars" :key="pageIndex">
 				<scroll-view scroll-y="true" :style="{height:swiperHeight+'px'}" @scrolltolower="handleReachBottom">
 					<block v-for="(item,index) in listData" :key="index">
-						<s-index-list :itemData="item"></s-index-list>
-					</block> 
+						<s-index-list :itemData="item" @handleAddAttention="handleAddAttention"></s-index-list>
+					</block>
 					<!-- <s-load-more :loadText="loadText" v-if="tabBars[tabIndex].currentPageNum>1"></s-load-more> -->
 				</scroll-view>
 			</swiper-item>
@@ -24,6 +24,17 @@
 			sLoadMore
 		},
 		onLoad() {
+			uni.getStorage({
+				key: "userinfo",
+				complete: (res) => {
+					if (res.data == null || res.data == '') {
+						this.isLogin = false
+					} else {
+						this.isLogin = true
+						this.userInfo = JSON.parse(res.data)
+					}
+				}
+			})
 			this.getTabList()
 			uni.getSystemInfo({
 				success: (res) => {
@@ -31,6 +42,16 @@
 					this.swiperHeight = height;
 				}
 			});
+			uni.$on("handleAddAttention", (e) => {
+				this.tabBars.forEach(parentv => {
+					parentv.listData.forEach(v => {
+						if (v.user_id == e.userId) {
+							v.hasAttention = true
+						}
+					})
+				})
+				this.listData = this.tabBars[this.tabIndex].listData
+			})
 		},
 		data() {
 			return {
@@ -39,7 +60,9 @@
 				tabBars: [],
 				scrollInto: "",
 				loadText: "上拉加载更多...",
-				listData: []
+				listData: [],
+				userInfo: {},
+				isLogin: false
 			}
 		},
 		methods: {
@@ -79,7 +102,10 @@
 				// this.listData = []
 				this.request({
 					url: this.config.BASE_URL + "postclass/" + this.tabBars[this.tabIndex].tabId + "/post/" + this.tabBars[this.tabIndex]
-						.currentPageNum
+						.currentPageNum,
+					header: {
+						token: this.isLogin ? this.userInfo.token : ''
+					}
 				}).then(res => {
 					if (res.data.list.length <= 0) {
 						return uni.showToast({
@@ -88,13 +114,40 @@
 					}
 					this.tabBars[this.tabIndex].listData = [...this.tabBars[this.tabIndex].listData, ...res.data.list]
 					this.tabBars[this.tabIndex].currentPageNum = this.tabBars[this.tabIndex].currentPageNum + 1
+					this.changeAttention()
 					this.listData = this.tabBars[this.tabIndex].listData
+				})
+			},
+			changeAttention() {
+				this.tabBars.forEach(parentv => {
+					parentv.listData.forEach(v => {
+						v.user.fens.find(fv => {
+							if (fv.id == this.userInfo.id) {
+								v.hasAttention = true
+							}
+						})
+					})
 				})
 			},
 			//到达底部
 			handleReachBottom() {
 				this.loadText = "加载中..."
 				this.getListData()
+			},
+			handleAddAttention(e) {
+				// this.tabBars.forEach(parentv => {
+				// 	parentv.listData.forEach(v => {
+				// 		if (v.user_id == e.userId) {
+				// 			v.hasAttention = true
+				// 		}
+				// 	})
+				// })
+				this.listData.forEach(v => {
+					if (v.user_id == e.userId) {
+						v.hasAttention = true
+					}
+				})
+				console.log(this.listData)
 			}
 		},
 		onNavigationBarSearchInputClicked() {

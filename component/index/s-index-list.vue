@@ -1,5 +1,5 @@
 <template>
-	<view class="item_wrap animated fadeInDown fast" @click="handleItemClick">
+	<view class="item_wrap animated fadeInDown fast" >
 		<view class="item_line1">
 			<view class="line1_left">
 				<image :src="getHeadImg" mode="aspectFill" lazy-load="true"></image>
@@ -16,14 +16,14 @@
 				</view>
 			</view>
 
-			<view class="attention">
+			<view class="attention" v-if="!itemData.hasAttention" @click="handleAddAttention">
 				+&nbsp;关注
 			</view>
 		</view>
 		<view class="item_line2">
 			{{itemData.content}}
 		</view>
-		<view v-if="itemData.titlepic" class="item_line3">
+		<view v-if="itemData.titlepic" class="item_line3" @click="handleItemClick">
 			<image :src="itemData.titlepic" mode="scaleToFill" lazy-load="true"></image>
 		</view>
 		<view class="item_line4">
@@ -65,6 +65,11 @@
 			handleItemClick() {
 				uni.navigateTo({
 					url: "/pages/index/index-detail/index-detail?indexItem=" + JSON.stringify(this.itemData)
+				})
+			},
+			handleAddAttention(){
+				this.$emit('handleAddAttention',{
+					userId:this.itemData.user_id
 				})
 			}
 		},
