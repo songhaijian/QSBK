@@ -3,7 +3,7 @@
 		<view class="right_menu" v-show="isShowMenuDialog">
 			<view class="menu_line iconfont icon-sousuo" @click="handleLaHei">
 				<view class="title">
-					拉黑
+					{{isBlack?"取消拉黑":"拉黑"}}
 				</view>
 			</view>
 			<view class="menu_line iconfont icon-qingchu" @click="handleRemark">
@@ -22,7 +22,8 @@
 			isShowMenuDialog: {
 				type: Boolean,
 				value: false
-			}
+			},
+			isBlack: false
 		},
 		methods: {
 			handleLaHei() {

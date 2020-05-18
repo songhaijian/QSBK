@@ -143,11 +143,12 @@
 					"titleNView": {
 						"autoBackButton": false,
 						"searchInput": {
-							"placeholder": "搜索糗事",
+							"placeholder": "搜索人员",
 							"borderRadius": "10rpx",
 							"backgroundColor": "#f7f7f7",
 							"placeholderColor": "#cdcdcd",
-							"align": "left"
+							"align": "left",
+							"disabled": "true"
 						},
 						"buttons": [{
 							"float": "right",
@@ -231,6 +232,19 @@
 						"buttons": [{
 							"float": "right",
 							"type": "menu"
+						}]
+					}
+				}
+			}
+		}, {
+			"path": "pages/mine/mine-scan-history/mine-scan-history",
+			"style": {
+				"navigationBarTitleText": "浏览历史",
+				"app-plus": {
+					"titleNView": {
+						"buttons": [{
+							"float": "right",
+							"type": "close"
 						}]
 					}
 				}

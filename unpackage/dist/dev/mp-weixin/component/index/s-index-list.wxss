@@ -46,8 +46,9 @@
   display: flex;
 }
 .item_wrap .item_line1 .line1_left image.data-v-add1435c {
+  will-change: transform;
   width: 80rpx;
-  height: 80rpxx;
+  height: 80rpx;
   border-radius: 50%;
 }
 .item_wrap .item_line1 .line1_left .user_wrap.data-v-add1435c {
@@ -69,6 +70,7 @@
   color: #a5a5a5;
 }
 .item_wrap .item_line1 .line1_left .user_wrap .name_wrap image.data-v-add1435c {
+  will-change: transform;
   margin-left: 10rpx;
   width: 30rpx;
   height: 30rpx;
@@ -91,6 +93,9 @@
 }
 .item_wrap .item_line3 image.data-v-add1435c {
   width: 100%;
+  height: 300rpx;
+  will-change: transform;
+  border-radius: 10rpx;
 }
 .item_wrap .item_line4.data-v-add1435c {
   display: -webkit-box;

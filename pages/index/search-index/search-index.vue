@@ -10,31 +10,42 @@
 				<s-news-recent-update-item :recentItem="item"></s-news-recent-update-item>
 			</block>
 		</template>
+		<template v-if="type=='user'">
+			<block v-for="(item,index) in listData" :key="index">
+				<s-paper-friend-item :friendItem="item"></s-paper-friend-item>
+			</block>
+		</template>
 	</view>
 </template>
 
 <script>
 	import sIndexList from "../../../component/index/s-index-list.vue"
 	import sNewsRecentUpdateItem from "../../../component/news/s-news-recent-update-item.vue"
+	import sPaperFriendItem from "../../../component/paper/s-paper-friend-item.vue"
 	export default {
 		components: {
 			sIndexList,
-			sNewsRecentUpdateItem
+			sNewsRecentUpdateItem,
+			sPaperFriendItem
 		},
 		onLoad(options) {
 			this.type = options.type
 			if (options.type == 'qiushi') {
 				this.typeUrl = "search/post"
-			} else if (options.type = 'topic') {
+			} else if (options.type == 'topic') {
 				this.typeUrl = "search/topic"
+			} else if (options.type == 'user') {
+				this.typeUrl = "search/user"
 			}
 			// #ifdef APP-PLUS
 			let currentWebView = this.$mp.page.$getAppWebview()
 			let titleView = currentWebView.getStyle().titleNView
 			if (options.type == 'qiushi') {
 				titleView.searchInput.placeholder = "搜索糗事"
-			} else if (options.type = 'topic') {
+			} else if (options.type == 'topic') {
 				titleView.searchInput.placeholder = "搜索话题"
+			} else if (options.type == 'user') {
+				titleView.searchInput.placeholder = "搜索人员"
 			}
 			currentWebView.setStyle({
 				titleNView: titleView

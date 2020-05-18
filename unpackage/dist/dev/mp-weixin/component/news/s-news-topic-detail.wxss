@@ -43,6 +43,7 @@
   display: flex;
 }
 .topic_detail_wrap .info_wrap .info_line1 image.data-v-1619d835 {
+  z-index: 10;
   width: 150rpx;
   height: 150rpx;
   border-radius: 10rpx;

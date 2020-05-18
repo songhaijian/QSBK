@@ -128,6 +128,7 @@
 .commen_list .item_right_wrap .item_line3 image.data-v-5018b6b6 {
   margin-top: 20rpx;
   width: 100%;
+  height: 300rpx;
   border-radius: 10rpx;
 }
 .commen_list .item_right_wrap .item_line3 .icon-bofang.data-v-5018b6b6 {

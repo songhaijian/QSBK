@@ -60,4 +60,28 @@
   margin-top: 20rpx;
   background-color: #ffe934;
 }
+.bottom_wrap.data-v-58de2131 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  width: 100%;
+  border-top: 1rpx solid #eee;
+}
+.bottom_wrap .select_sort_wrap.data-v-58de2131 {
+  padding: 20rpx 0;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  text-align: center;
+}
+.bottom_wrap .select_topic_wrap.data-v-58de2131 {
+  padding: 20rpx 0;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  text-align: center;
+}
 

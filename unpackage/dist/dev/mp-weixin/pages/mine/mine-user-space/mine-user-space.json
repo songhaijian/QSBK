@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "s-mine-user-space-topbg": "/component/mine/s-mine-user-space-topbg",
+    "s-mine-sort-item": "/component/mine/s-mine-sort-item",
+    "s-tab-bar": "/component/index/s-tab-bar",
+    "s-news-common-list": "/component/common/s-news-common-list",
+    "s-mine-user-space-pop": "/component/mine/s-mine-user-space-pop"
+  }
+}

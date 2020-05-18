@@ -1,16 +1,16 @@
 <template>
 	<view class="friend_item_wrap">
-		<image :src="friendItem.headImg" mode="widthFix"></image>
+		<image :src="getHeadImg" mode="aspectFill" @tap.stop="handleUserSpace"></image>
 		<view class="friend_item_middle">
 			<view class="nickname">
-				{{friendItem.nickName}}
+				{{friendItem.username}}
 			</view>
-			<view class="sex_wrap" :class="[friendItem.sex==0?'femaleBg':'maleBg']">
-				<view class="iconfont" :class="[friendItem.sex==0?'icon-nv':'icon-nan']">
+			<view class="sex_wrap" :class="[friendItem.userinfo.sex==2?'femaleBg':'maleBg']">
+				<view class="iconfont" :class="[friendItem.userinfo.sex==2?'icon-nv':'icon-nan']">
 
 				</view>
 				<view class="age">
-					{{friendItem.age}}
+					{{friendItem.userinfo.age}}
 				</view>
 			</view>
 		</view>
@@ -34,6 +34,20 @@
 			handleAddAttention() {
 				if (!this.isAttention) {
 					this.isAttention = !this.isAttention
+				}
+			},
+			handleUserSpace(){
+				uni.navigateTo({
+					url:"/pages/mine/mine-user-space/mine-user-space?userId=" + this.friendItem.id
+				})
+			}
+		},
+		computed: {
+			getHeadImg() {
+				if (this.friendItem.userpic == null) {
+					return "/static/userpic/12.jpg"
+				} else {
+					return this.friendItem.userpic
 				}
 			}
 		}

@@ -35,7 +35,7 @@
 }
 .login_wrap .head_img_wrap image.data-v-b7a9da5a {
   width: 100rpx;
-  height: 100prx;
+  height: 100rpx;
   border-radius: 50%;
 }
 .login_wrap .login_middle_wrap.data-v-b7a9da5a {

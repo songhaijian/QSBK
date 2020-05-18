@@ -2,26 +2,26 @@
 	<view class="top_bg_and_info">
 		<image :src="bgImgSrc" mode="aspectFill" lazy-load="true" @click="handleChangeBg"></image>
 		<view class="user_info_wrap">
-			<image :src="userInfo.headImg" mode="widthFix"></image>
+			<image :src="userInfo.userpic" mode="aspectFill"></image>
 			<view class="info_wrap">
 				<view class="nickname_wrap">
-					{{userInfo.name}}
+					{{userInfo.username}}
 				</view>
 				<view class="age_wrap">
 					<view class="iconfont icon-nan">
 
 					</view>
 					<view class="age">
-						{{userInfo.age}}
+						{{11}}
 					</view>
 				</view>
 			</view>
-			<view class="attention_wrap" :class="{is_attention_wrap:isAttention}" @click="handleChangeAttention">
-				<view v-if="!isAttention" class="iconfont icon-zengjia">
+			<view class="attention_wrap" :class="{is_attention_wrap:userInfo.isAttention}" @click="handleChangeAttention" v-if="!isLoginUser">
+				<view v-if="!userInfo.isAttention" class="iconfont icon-zengjia">
 
 				</view>
 				<view class="attention">
-					{{isAttention?'已关注':'关注'}}
+					{{userInfo.isAttention?'已关注':'关注'}}
 				</view>
 			</view>
 		</view>
@@ -31,12 +31,12 @@
 <script>
 	export default {
 		props: {
-			userInfo: Object
+			userInfo: Object,
+			isLoginUser: false
 		},
 		data() {
 			return {
-				bgImgSrc: '/static/bgimg/' + this.userInfo.bgImgIndex + '.jpg',
-				isAttention: this.userInfo.isAttention
+				bgImgSrc: '/static/bgimg/1.jpg'
 			}
 		},
 		methods: {
@@ -45,8 +45,8 @@
 				this.bgImgSrc = '/static/bgimg/' + (this.userInfo.bgImgIndex % 4 + 1) + '.jpg'
 			},
 			handleChangeAttention() {
-				if (!this.isAttention) {
-					this.isAttention = !this.isAttention
+				if (!this.userInfo.isAttention) {
+					this.userInfo.isAttention = !this.userInfo.isAttention
 				}
 			}
 		}

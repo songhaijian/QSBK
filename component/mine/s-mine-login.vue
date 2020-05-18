@@ -30,7 +30,7 @@
 		methods:{
 			handleUserSpace(){
 				uni.navigateTo({
-					url:"/pages/mine/mine-user-space/mine-user-space"
+					url:"/pages/mine/mine-user-space/mine-user-space?userId="+ this.userInfo.id
 				})
 			}
 		},

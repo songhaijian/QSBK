@@ -59,7 +59,9 @@
 				loginListData: [{
 						icon: "icon-liulan",
 						iconColor: "#44b3ff",
-						title: "浏览历史"
+						title: "浏览历史",
+						navigatorType: "navigatorTo",
+						navigatorUrl: "/pages/mine/mine-scan-history/mine-scan-history"
 					},
 					{
 						icon: "icon-huiyuanvip",
@@ -148,7 +150,7 @@
 	.sort_wrap {
 		padding: 0 80rpx;
 		display: flex;
-		justify-content: center;
+		justify-content: space-around;
 	}
 
 	.banner_wrap {

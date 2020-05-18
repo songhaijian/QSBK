@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<s-mine-user-space-topbg :userInfo="userInfo"></s-mine-user-space-topbg>
+		<s-mine-user-space-topbg :userInfo="userInfo" :isLoginUser="isLoginUser"></s-mine-user-space-topbg>
 		<view class="sort_wrap">
 			<block v-for="(sortItem,sortIndex) in sortList">
 				<s-mine-sort-item :sortItem="sortItem"></s-mine-sort-item>
@@ -13,10 +13,10 @@
 					账号信息
 				</view>
 				<view class="age_wrap">
-					糗龄:{{getAge}}
+					糗龄:{{userInfo.age}}
 				</view>
 				<view class="age_wrap">
-					糗百ID:{{homeData.id}}
+					糗百ID:{{userInfo.id}}
 				</view>
 			</view>
 			<view class="home_wrap">
@@ -24,16 +24,16 @@
 					个人信息
 				</view>
 				<view class="age_wrap">
-					星座:{{getXingZuo}}
+					星座:{{userInfo.xingZuo}}
 				</view>
 				<view class="age_wrap">
-					职业:{{homeData.position}}
+					职业:{{userInfo.job}}
 				</view>
 				<view class="age_wrap">
-					故乡:{{homeData.address}}
+					故乡:{{userInfo.address}}
 				</view>
 				<view class="age_wrap">
-					情感状态:{{homeData.qg}}
+					情感状态:{{userInfo.qg}}
 				</view>
 			</view>
 		</template>
@@ -42,7 +42,8 @@
 				<s-news-common-list :item="listItem"></s-news-common-list>
 			</block>
 		</template>
-		<s-mine-user-space-pop :isShowMenuDialog="isShowMenuDialog" @handleLaHei="handleLaHei" @handleRemark="handleRemark" @handleClickMask="handleClickMask"></s-mine-user-space-pop>
+		<s-mine-user-space-pop :isShowMenuDialog="isShowMenuDialog" @handleLaHei="handleLaHei" @handleRemark="handleRemark"
+		 @handleClickMask="handleClickMask" :isBlack="isBlack"></s-mine-user-space-pop>
 	</view>
 </template>
 
@@ -61,25 +62,28 @@
 			sNewsCommonList,
 			sMineUserSpacePop
 		},
+		onLoad(options) {
+			this.userId = options.userId
+			if (this.userId == this.userinfo.UserInfo.userInfo.id) {
+				this.isLoginUser = true
+			}
+			this.getUserInfo()
+		},
 		data() {
 			return {
-				userInfo: {
-					bgImgIndex: 1,
-					isAttention: false,
-					headImg: "/static/userpic/10.jpg",
-					age: "20",
-					sex: 0,
-					name: "JIA一勺",
-				},
+				isLoginUser: false,
+				isBlack: false,
+				userId: 0,
+				userInfo: {},
 				sortList: [{
 					name: "获赞",
-					count: '10K'
+					count: 0
 				}, {
 					name: "关注",
-					count: '11'
+					count: 0
 				}, {
 					name: "粉丝",
-					count: '12'
+					count: 0
 				}],
 				tabIndex: 0,
 				tabBars: [{
@@ -175,17 +179,11 @@
 						}
 					]
 				},
-				homeData: {
-					age: "1年8月6日",
-					id: "1215",
-					position: "IT",
-					address: "广东广州",
-					qg: "已婚",
-					birthday: "2019-06-23"
-				},
+				homeData: {},
 				isShowMenuDialog: false
 			}
 		},
+
 		methods: {
 			//TabBar点击事件
 			handleItemClick(index) {
@@ -193,20 +191,70 @@
 			},
 			handleLaHei() {
 				this.isShowMenuDialog = false
+				this.handleBlack(!this.isBlack)
 			},
 			handleRemark() {
 				this.isShowMenuDialog = false
 			},
 			handleClickMask() {
 				this.isShowMenuDialog = false
+			},
+			getUserInfo() {
+				this.request({
+					url: this.config.BASE_URL + "getuserinfo",
+					method: "post",
+					data: {
+						user_id: this.userId
+					},
+					header: {
+						token: this.userinfo.UserInfo.userInfo.token
+					}
+				}).then(res => {
+					this.userInfo = res.data
+					this.userInfo.bgImgIndex = 1
+					this.userInfo.isAttention = res.data.fens.length > 0 ? true : false
+					this.isBlack = res.data.blacklist.length > 0 ? true : false
+					this.userInfo.age = time.gettime.sumAge(this.userInfo.userinfo.birthday)
+					this.userInfo.xingZuo = time.gettime.getHoroscope(this.userInfo.userinfo.birthday)
+					this.userInfo.job = res.data.userinfo.job
+					this.userInfo.address = res.data.userinfo.path
+					this.userInfo.qg = res.data.userinfo.qg
+					this.getCount()
+				})
+			},
+			getCount() {
+				this.request({
+					url: this.config.BASE_URL + "user/getcounts/" + this.userInfo.id
+				}).then(res => {
+					this.sortList[0].count = res.data.total_ding_count
+					this.sortList[1].count = res.data.withfollow_count
+					this.sortList[2].count = res.data.withfen_count
+				})
+			},
+			handleBlack(type) {
+				this.request({
+					url: this.config.BASE_URL + (type ? "addblack" : "removeblack"),
+					method: "post",
+					data: {
+						id: this.userInfo.userinfo.user_id
+					},
+					header: {
+						token: this.userinfo.UserInfo.userInfo.token
+					}
+				}).then(res => {
+					uni.showToast({
+						title: res.msg
+					})
+					this.isBlack = !this.isBlack
+				})
 			}
 		},
 		computed: {
 			getAge() {
-				return time.gettime.sumAge(this.homeData.birthday)
+				return time.gettime.sumAge(this.userInfo.userinfo.birthday)
 			},
 			getXingZuo() {
-				return time.gettime.getHoroscope(this.homeData.birthday)
+				return time.gettime.getHoroscope(this.userInfo.userinfo.birthday)
 			}
 		},
 		onNavigationBarButtonTap(e) {
@@ -220,6 +268,7 @@
 		padding: 0 100rpx;
 		position: relative;
 		display: flex;
+		justify-content: space-around;
 		margin-top: -50rpx;
 		background-color: #fff;
 		border-radius: 20rpx 20rpx 0 0;

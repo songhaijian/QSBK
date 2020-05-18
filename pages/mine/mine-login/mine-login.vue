@@ -46,7 +46,7 @@
 		<view class="agreement_wrap">
 			注册即代表您同意
 			<view class="aggrement">
-				<<仿糗事百科用户协议>>
+				仿糗事百科用户协议
 			</view>
 		</view>
 	</view>

@@ -185,7 +185,16 @@
 		},
 		onNavigationBarButtonTap: function(res) {
 			this.showShareDialog = !this.showShareDialog
+		},
+		// #ifndef APP-PLUS
+		onShareAppMessage(res) {
+			return {
+				title: this.itemData.title,
+				path: "/pages/index/index-detail/index-detail?indexItem=" + JSON.stringify(this.itemData)
+			}
 		}
+		// #endif
+
 	}
 </script>
 

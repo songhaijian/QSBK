@@ -102,3 +102,23 @@ https://ceshi2.dishait.cn/api/v1/post/comment
 	"data":"231234",//评论内容
 	"post_id":"614"//文章id
 }
+23、获取互关、关注、粉丝、发布等数量(get)
+https://ceshi2.dishait.cn/api/v1/user/getcounts/(用户id)
+24、获取小纸条我的好友列表(互关、关注、粉丝)
+https://ceshi2.dishait.cn/api/v1/(friends、follows、fens)/1
+25、小纸条页面我的好友搜索接口(post)
+https://ceshi2.dishait.cn/api/v1/search/user
+{
+	"keyword":"测试",
+	"page": 1
+}
+26、获取人员信息接口(post)
+https://ceshi2.dishait.cn/api/v1/getuserinfo
+{
+	"user_id":"613"
+}
+27、拉黑、取消拉黑接口(post)
+https://ceshi2.dishait.cn/api/v1/addblack(removeblack)
+{
+	"id":"613"
+}

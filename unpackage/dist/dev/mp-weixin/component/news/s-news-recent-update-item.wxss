@@ -51,4 +51,7 @@
   display: -webkit-flex;
   display: flex;
 }
+.recent_update_item .recent_update_item_right .recent_update_item_right_line3 .today_num_wrap.data-v-4fab1daa {
+  margin-left: 10rpx;
+}
 

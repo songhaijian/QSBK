@@ -121,6 +121,7 @@
 }
 .commen_list .item_right_wrap .item_line3 image.data-v-271f23dc {
   width: 100%;
+  height: 300rpx;
   border-radius: 10rpx;
 }
 .commen_list .item_right_wrap .item_line3 .icon-bofang.data-v-271f23dc {

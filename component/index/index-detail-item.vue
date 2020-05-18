@@ -1,7 +1,7 @@
 <template>
 	<view class="commen_list">
 		<view class="head_img_wrap">
-			<image :src="getHeadImg" mode="aspectFill"></image>
+			<image :src="item.user.userpic||'/static/userpic/12.jpg'" mode="aspectFill" @tap.stop="handleUserSpace"></image>
 		</view>
 		<view class="item_right_wrap">
 			<view class="item_line1">
@@ -104,16 +104,15 @@
 					urls: imgArr,
 					current: index
 				})
+			},
+			handleUserSpace(){
+				console.log(this.item)
+				uni.navigateTo({
+					url:"/pages/mine/mine-user-space/mine-user-space?userId=" + this.item.user.id
+				})
 			}
 		},
 		computed: {
-			getHeadImg() {
-				if (this.item.user.userpic == null) {
-					return "/static/userpic/12.jpg"
-				} else {
-					return this.item.user.userpic
-				}
-			},
 			formatTime(){
 				return time.gettime.gettime(this.item.create_time)
 			}

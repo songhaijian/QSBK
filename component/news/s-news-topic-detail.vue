@@ -53,6 +53,7 @@
 				display: flex;
 
 				image {
+					z-index: 10;
 					width: 150rpx;
 					height: 150rpx;
 					border-radius: 10rpx;

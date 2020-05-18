@@ -26,6 +26,7 @@
 /* 文章场景相关 */
 .tab_bar_wrap.data-v-19c321dc {
   padding-right: 20rpx;
+  text-align: center;
 }
 .tab_bar_wrap .tab_scroll.data-v-19c321dc {
   white-space: nowrap;

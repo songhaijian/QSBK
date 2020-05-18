@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<uni-nav-bar :statusBar="true" :fixed="true">
+		<uni-nav-bar :statusBar="showStatusBar" :fixed="showStatusBar">
 			<block slot="left">
 				<view class="nav_left_wrap">
 					<view class="iconfont icon-qiandao">
@@ -39,7 +39,16 @@
 			navTitles: Array,
 			navIndex: Number
 		},
-
+		data() {
+			return {
+				// #ifdef APP-PLUS
+				showStatusBar: true
+				// #endif
+				// #ifndef APP-PLUS
+				showStatusBar: false
+				// #endif
+			}
+		},
 		methods: {
 			handleTabClick(index) {
 				this.$emit('tabClick',index)

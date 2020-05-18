@@ -1,8 +1,8 @@
 <template>
-	<view class="item_wrap animated fadeInDown fast" >
+	<view class="item_wrap animated fadeInDown fast">
 		<view class="item_line1">
 			<view class="line1_left">
-				<image :src="getHeadImg" mode="aspectFill" lazy-load="true"></image>
+				<image :src="getHeadImg" mode="aspectFill" lazy-load="true" @tap.stop="handleUserSpace"></image>
 				<view class="user_wrap">
 					<view class="name_wrap">
 						<view class="nickname">
@@ -66,10 +66,40 @@
 				uni.navigateTo({
 					url: "/pages/index/index-detail/index-detail?indexItem=" + JSON.stringify(this.itemData)
 				})
+				var historyList = []
+				uni.getStorage({
+					key: "history" + this.userinfo.UserInfo.userInfo.id,
+					complete: (res) => {
+						if (res.data == null || res.data == '') {
+
+						} else {
+							historyList = JSON.parse(res.data)
+						}
+						var hasIndex = historyList.findIndex(v => {
+							return v.id == this.itemData.id
+						})
+						if (hasIndex < 0) {
+							historyList.push(this.itemData)
+							uni.setStorage({
+								key: "history" + this.userinfo.UserInfo.userInfo.id,
+								data: JSON.stringify(historyList),
+								success() {
+									console.log("添加成功")
+								}
+							})
+						}
+					}
+				})
+
 			},
-			handleAddAttention(){
-				this.$emit('handleAddAttention',{
-					userId:this.itemData.user_id
+			handleAddAttention() {
+				this.$emit('handleAddAttention', {
+					userId: this.itemData.user_id
+				})
+			},
+			handleUserSpace() {
+				uni.navigateTo({
+					url: "/pages/mine/mine-user-space/mine-user-space?userId=" + this.itemData.user.id
 				})
 			}
 		},

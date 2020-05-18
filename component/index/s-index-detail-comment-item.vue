@@ -1,6 +1,6 @@
 <template>
 	<view class="comment_item_wrap" :class="{apply_comment_wrap:commentItem.fid>0}" @click="handleClickUser">
-		<image :src="commentItem.user.userpic" mode="aspectFill"></image>
+		<image :src="commentItem.user.userpic" mode="aspectFill" @tap.stop="handleUserSpace"></image>
 		<view class="comment_item_right_wrap">
 			<view class="comment_item_line1">
 				{{commentItem.user.username}}
@@ -29,6 +29,12 @@
 		methods: {
 			handleClickUser() {
 				this.$emit("handleClickUser", this.commentItem.id)
+			},
+			handleUserSpace(){
+				uni.navigateTo({
+					url:"/pages/mine/mine-user-space/mine-user-space?userId=" + this.commentItem.user.id
+				})
+				console.log(this.commentItem)
 			}
 		}
 	}

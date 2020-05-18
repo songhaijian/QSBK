@@ -39,9 +39,6 @@
 		['compressed', 'original']
 	]
 	export default {
-		components: {
-			permision
-		},
 		data() {
 			return {
 				imageList: [],

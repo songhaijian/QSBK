@@ -1,3 +1,7 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "s-index-list": "/component/index/s-index-list",
+    "s-news-recent-update-item": "/component/news/s-news-recent-update-item",
+    "s-paper-friend-item": "/component/paper/s-paper-friend-item"
+  }
 }

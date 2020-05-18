@@ -17,7 +17,9 @@
     "pages/mine/mine-change-userinfo/mine-change-userinfo",
     "pages/mine/mine-feedback/mine-feedback",
     "pages/mine/mine-about/mine-about",
-    "pages/mine/mine-login/mine-login"
+    "pages/mine/mine-login/mine-login",
+    "pages/mine/mine-user-space/mine-user-space",
+    "pages/mine/mine-scan-history/mine-scan-history"
   ],
   "subPackages": [],
   "window": {
